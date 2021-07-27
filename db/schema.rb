@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_085602) do
+ActiveRecord::Schema.define(version: 2021_07_27_031731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "compatibilty_rules", force: :cascade do |t|
+  create_table "compatibility_rules", force: :cascade do |t|
     t.integer "group_one_id"
     t.integer "group_two_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "compatible", default: false
+    t.boolean "enhancement", default: false
   end
 
   create_table "ingredient_groups", force: :cascade do |t|
