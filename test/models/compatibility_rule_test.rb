@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CompatibiltyRuleTest < ActiveSupport::TestCase
+class CompatibilityRuleTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
