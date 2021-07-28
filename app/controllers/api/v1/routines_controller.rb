@@ -8,7 +8,6 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
   end
   
   def create
-    #current_user = @user
     @new_routine = Routine.new(routine_params)
     @new_routine.user = current_user
 
@@ -42,12 +41,7 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
 
   private
 
-  #def set_user
-  #  @user = User.find(1)
-  #end
-
   def set_routine
-    #@user = set_user
     @routine = @user.routines.find(params[:id])
   end
 
