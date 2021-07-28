@@ -125,10 +125,10 @@ products = [
 
 
 
-Advanced_Night_Repair_Eye_Supercharged_Complex= [
-
-	"Methyl Trimethicone" ," Water-Aqua-Eau" , "Bifida Ferment Lysate" , "Dimethicone" , "Dimethicone/Vinyl Dimethicone Crosspolymer" , "Propanediol" , "Petrolatum" , "Sucrose" , "Algae Extract" , "Hypnea Musciformis (Algae) Extract" , "Acrylamide/Sodium Acryloyldimethyltaurate Copolymer" , "Butylene Glycol" , "Yeast Extract-Faex-Extrait De Levure" , "Tripeptide-32" , "Sodium Hyaluronate" , "Lactobacillus Ferment" , "Sodium Rna" , "Citrullus Vulgaris (Watermelon) Fruit Extract" , "Poria Cocos Sclerotium Extract" , "Lens Esculenta (Lentil) Fruit Extract" , "Pyrus Malus (Apple) Fruit Extract" , "Anthemis Nobilis (Chamomile) Flower Extract" , "Narcissus Tazetta Bulb Extract" , "Caffeine" , "Sodium Pca" , "Tocopheryl Acetate" , "Phytosphingosine" , "Trehalose" , "Glycine Soja (Soybean) Seed Extract" , I"sopropyl Jojobate" , "Betula Alba (Birch) Extract", "Peg/Ppg-18/18 Dimethicone" , "Ethylhexylglycerin" , "Gelidiella Acerosa Extract" , "Tromethamine" , "Polysorbate 80" , "Artemia Extract" , "Hydrolyzed Algin" , "Isohexadecane" , "Jojoba Alcohol" , "Jojoba Esters" , "Glycerin" , "Acrylates/C10-30 Alkyl Acrylate Crosspolymer" , "Hydrogenated Lecithin" , "Polysorbate 40" , "Caprylyl Glycol" , "Sodium Lactate" , "Lecithin" , "Bht" ," Potassium Sorbate" , "Phenoxyethanol" , "Iron Oxides (Ci 77491)" , I"ron Oxides (Ci 77492) ILN45118" 
-]
+#Advanced_Night_Repair_Eye_Supercharged_Complex= [
+#
+#	"Methyl Trimethicone" ," Water-Aqua-Eau" , "Bifida Ferment Lysate" , #"Dimethicone" , "Dimethicone/Vinyl Dimethicone Crosspolymer" , "Propanediol" , #"Petrolatum" , "Sucrose" , "Algae Extract" , "Hypnea Musciformis (Algae) #Extract" , "Acrylamide/Sodium Acryloyldimethyltaurate Copolymer" , "Butylene #Glycol" , "Yeast Extract-Faex-Extrait De Levure" , "Tripeptide-32" , "Sodium #Hyaluronate" , "Lactobacillus Ferment" , "Sodium Rna" , "Citrullus Vulgaris #(Watermelon) Fruit Extract" , "Poria Cocos Sclerotium Extract" , "Lens #Esculenta (Lentil) Fruit Extract" , "Pyrus Malus (Apple) Fruit Extract" , #"Anthemis Nobilis (Chamomile) Flower Extract" , "Narcissus Tazetta Bulb #Extract" , "Caffeine" , "Sodium Pca" , "Tocopheryl Acetate" , #"Phytosphingosine" , "Trehalose" , "Glycine Soja (Soybean) Seed Extract" , #I"sopropyl Jojobate" , "Betula Alba (Birch) Extract", "Peg/Ppg-18/18 #Dimethicone" , "Ethylhexylglycerin" , "Gelidiella Acerosa Extract" , #"Tromethamine" , "Polysorbate 80" , "Artemia Extract" , "Hydrolyzed Algin" , #"Isohexadecane" , "Jojoba Alcohol" , "Jojoba Esters" , "Glycerin" , "Acrylates/#C10-30 Alkyl Acrylate Crosspolymer" , "Hydrogenated Lecithin" , "Polysorbate #40" , "Caprylyl Glycol" , "Sodium Lactate" , "Lecithin" , "Bht" ," Potassium #Sorbate" , "Phenoxyethanol" , "Iron Oxides (Ci 77491)" , I"ron Oxides (Ci #77492) ILN45118" 
+#]
 
 
 
@@ -159,6 +159,20 @@ id = 1
 # 	ingredient.save
 # 	id += 1
 # end
+ingredients = Ingredient.all
+
 products.each do |name|
-	Product.create(name: name)
+	product = Product.new(name: name)
+	product["brand"] = ["SKII","ESTE LAUDER", "MAC", "GUCCI"].sample
+	product.save
+	id = 1
+	5.times do
+		pi = ProductIngredient.new()
+		ig = Ingredient.find(id)
+		pi["product_id"] = product.id
+		pi["ingredient_id"] = ig.id
+		pi["rank"] = [1,2,3,4,5,6,7,8,9].sample
+		pi.save
+		id += 1
+	end
 end

@@ -6,4 +6,15 @@ class Product < ApplicationRecord
   has_many :ingredient_groups, through: :ingredients
   # /to check which routines a product is associateed with
   # has_many :routines, through: :routine_products
+
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+    against: [:name, :brand],
+    associated_against: {
+      ingredients: [:name],
+      ingredient_groups: [:name ]
+    },
+    using: {
+      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+    }
 end
