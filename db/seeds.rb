@@ -113,14 +113,52 @@ ingreds = [
 	"Tocopherol Phosphate"
 ]
 
+products = [
+	"Advanced Night Repair Eye Supercharged Complex",
+	"Advanced Night Repair Synchronized Multi-Recovery Complex Serum",
+	"The Inkey List - Glycolic Acid Toner",
+	"SkinCeuticals - C E FERULIC® WITH 15% L-ASCORBIC ACID",
+	"The Ordinary - Niacinamide 10% + Zinc 1%",
+	"The Ordinary - AHA 30% + BHA 2% Peeling Solution"
+]
+
+
+
+
+Advanced_Night_Repair_Eye_Supercharged_Complex= [
+
+	"Methyl Trimethicone" ," Water-Aqua-Eau" , "Bifida Ferment Lysate" , "Dimethicone" , "Dimethicone/Vinyl Dimethicone Crosspolymer" , "Propanediol" , "Petrolatum" , "Sucrose" , "Algae Extract" , "Hypnea Musciformis (Algae) Extract" , "Acrylamide/Sodium Acryloyldimethyltaurate Copolymer" , "Butylene Glycol" , "Yeast Extract-Faex-Extrait De Levure" , "Tripeptide-32" , "Sodium Hyaluronate" , "Lactobacillus Ferment" , "Sodium Rna" , "Citrullus Vulgaris (Watermelon) Fruit Extract" , "Poria Cocos Sclerotium Extract" , "Lens Esculenta (Lentil) Fruit Extract" , "Pyrus Malus (Apple) Fruit Extract" , "Anthemis Nobilis (Chamomile) Flower Extract" , "Narcissus Tazetta Bulb Extract" , "Caffeine" , "Sodium Pca" , "Tocopheryl Acetate" , "Phytosphingosine" , "Trehalose" , "Glycine Soja (Soybean) Seed Extract" , I"sopropyl Jojobate" , "Betula Alba (Birch) Extract", "Peg/Ppg-18/18 Dimethicone" , "Ethylhexylglycerin" , "Gelidiella Acerosa Extract" , "Tromethamine" , "Polysorbate 80" , "Artemia Extract" , "Hydrolyzed Algin" , "Isohexadecane" , "Jojoba Alcohol" , "Jojoba Esters" , "Glycerin" , "Acrylates/C10-30 Alkyl Acrylate Crosspolymer" , "Hydrogenated Lecithin" , "Polysorbate 40" , "Caprylyl Glycol" , "Sodium Lactate" , "Lecithin" , "Bht" ," Potassium Sorbate" , "Phenoxyethanol" , "Iron Oxides (Ci 77491)" , I"ron Oxides (Ci 77492) ILN45118" 
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ingredient_groups.each do |ig|
 # 	IngredientGroup.create(name:ig)
 # end
 id = 1
-ingreds.each do |ing|
-	ingredient = Ingredient.new(name: ing)
-	ingredient["ingredient_group_id"] = id
-	ingredient.save
-	id += 1
-
+# ingreds.each do |ing|
+# 	ingredient = Ingredient.new(name: ing)
+# 	ingredient["ingredient_group_id"] = id
+# 	ingredient.save
+# 	id += 1
+# end
+products.each do |name|
+	Product.create(name: name)
 end
