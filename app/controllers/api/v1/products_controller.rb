@@ -3,9 +3,6 @@ class Api::V1::ProductsController <  Api::V1::BaseController
   def index
 
       @products = Product.all
-
-      
-
     if params[:query].present?
     # if params[:query].present?
       @products = @products.search_by_name(params[:query])

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       devise_scope :user do
-        post 'login', to: 'user_sessions#create', as: 'login'
+        post 'login', to: 'user_sessions#login', as: 'login'
         post 'manual_login', to: "user_sessions#manual_create"
       end
       resources :users, only: [:show ]
