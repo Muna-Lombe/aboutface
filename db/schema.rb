@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_28_091533) do
+ActiveRecord::Schema.define(version: 2021_07_29_105624) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "authentication_tokens", force: :cascade do |t|
@@ -32,7 +33,8 @@ ActiveRecord::Schema.define(version: 2021_07_28_091533) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "compatible", default: false
-    t.boolean "enhancement", default: false
+    t.text "reason"
+    t.integer "rating"
   end
 
   create_table "ingredient_groups", force: :cascade do |t|

@@ -15,4 +15,19 @@ class IngredientGroup < ApplicationRecord
   def enhancement_rules
     rules.where(compatibility_rules: {enhancement: true})
   end
+
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+    against: :name,
+    associated_against: {
+      ingredients: [:name]
+    },
+    using: {
+      trigram: {
+        word_similarity: true
+      }
+    }
+    #against: :name,
+    #using: [:trigram]
+  
 end

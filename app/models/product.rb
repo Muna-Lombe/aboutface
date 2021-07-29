@@ -15,6 +15,8 @@ class Product < ApplicationRecord
       ingredient_groups: [:name ]
     },
     using: {
-      tsearch: { prefix: true }
+      trigram: {
+        word_similarity: true
+      }
     }
 end

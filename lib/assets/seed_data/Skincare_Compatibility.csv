@@ -1,0 +1,42 @@
+name,compared_to,compatible,text,rating
+Vitamin A,Vitamin A,FALSE,May be irritating for sensitive skin.,2
+Vitamin A,Vitamin B3 / Niacinamide,TRUE,Pairs well together,1
+Vitamin A,Vitamin C,FALSE,Ingredients may not be effective together,3
+Vitamin A,Alpha-hydroxy acids (AHAs),FALSE,May cause irritation,4
+Vitamin A,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May cause irritation,4
+Vitamin A,Polyhydroxy acids (PHAs),FALSE,May cause irritation,4
+Vitamin A,Benzoyl Peroxide,FALSE,"Ingredients may not be effective together, although Tretinoin and benzoyl peroxide will still be effective.",3
+Vitamin A,Hydroquinone,TRUE,Do not use for more than three months. Please consult a dermatologist.,1
+Vitamin A,Azelaic Acid,TRUE,Use of Vitamin A can enhnace effectiveness of Azelaic Acid.,1
+Vitamin B3 / Niacinamide,Alpha-hydroxy acids (AHAs),FALSE,"Unless combined in specially formulated products, avoid mixing niacinamide with Alpha-hydroxy acids (AHAs) products as it causes flushing and redness. Consult a dermatologist for information about product layering these ingredients in your skincare routine.",5
+Vitamin B3/ Niacinamide,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May cause irritation as well as reduce the efficacy of the active ingredients.,4
+Vitamin B3 / Niacinamide,Polyhydroxy acids (PHAs),FALSE,Not enough data on  combining Polyhydroxy acids (PHAs) and niacinamide. Consult a dermatologist or use products with caution.,3
+Vitamin B3 / Niacinamide,Benzoyl Peroxide,TRUE,Niacinimaide can help soothe irritation caused by Benzoyl Peroxide.,1
+Vitamin B3 / Niacinamide,Arbutin,FALSE,Avoid with The Ordinary Niacinamide Powder or with niacinamide in high concentrations due to pH conflict.,3
+Vitamin B5,Vitamin C,TRUE,Vitamin B5 can boost the efficacy of Vitamin C,1
+Vitamin C,Alpha-hydroxy acids (AHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Vitamin C,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Vitamin C,Polyhydroxy acids (PHAs),FALSE,Ingredients may not be effective together.,3
+Vitamin C,Benzoyl Peroxide,FALSE,Ingredients may not be effective together.,3
+Vitamin C,Azelaic Acid,FALSE,May cause irritation.,
+Vitamin C,Arbutin,TRUE,Both Vitamin C and Alpha Arbutin work along the same pathway and thus go very well with together.,1
+Alpha-hydroxy acids (AHAs),Alpha-hydroxy acids (AHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Alpha-hydroxy acids (AHAs),Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,Avoid salicylic acid and glycolic acid together as they may cause irritation. Alpha-hydroxy acids (AHAs) and Beta-hydroxy acid (salicylic acid) (BHAs)s together may be irritating for sensitive skin.,2
+Alpha-hydroxy acids (AHAs),Polyhydroxy acids (PHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Alpha-hydroxy acids (AHAs),Benzoyl Peroxide,FALSE,May cause irritation.,4
+Alpha-hydroxy acids (AHAs),Hydroquinone,FALSE,May cause irritation.,4
+Alpha-hydroxy acids (AHAs),Azelaic Acid,FALSE,May cause irritation.,4
+Alpha-hydroxy acids (AHAs),Bakuchiol,FALSE,Combining with Glycolic Acid may not be effective.,3
+Alpha-hydroxy acids (AHAs),Arbutin,TRUE,Combining Alpha Arbutin with Glycolic Acid or Lactic Acid increases efficacy of Alpha Arbutin,1
+Beta-hydroxy acid (salicylic acid) (BHAs),Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Beta-hydroxy acid (salicylic acid) (BHAs),Polyhydroxy acids (PHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Beta-hydroxy acid (salicylic acid) (BHAs),Benzoyl Peroxide,FALSE,May cause irritation.,4
+Beta-hydroxy acid (salicylic acid) (BHAs),Hydroquinone,TRUE,Use cautiously and in small amounts. Salicylic Acid can prevent build up of dead skin cells as Hydroquinone kills hyper-pigmented skin cells.,3
+Beta-hydroxy acid (salicylic acid) (BHAs),Azelaic Acid,FALSE,May cause irritation.,4
+Beta-hydroxy acid (salicylic acid) (BHAs),Arbutin,TRUE,Combining with Beta-hydroxy acid (salicylic acid) (BHAs) such as Salicylic Acid can incread efficacy of Alpha Arbutin.,1
+Polyhydroxy acids (PHAs),Benzoyl Peroxide,FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
+Polyhydroxy acids (PHAs),Azelaic Acid,FALSE,Not enough data on combining Polyhydroxy acids (PHAs) products and Azelaic Acid. Consult a dermatologist.,3
+Benzoyl Peroxide,Benzoyl Peroxide,FALSE,May cause irritaiton.,4
+Benzoyl Peroxide,Hydroquinone,FALSE,"Do not use Hydroquinone with any peroxide product, including Benzoyl Peroxide, Hydrogen Peroxide, or Resorcinol as it will stain skin.",5
+Benzoyl Peroxide,Azelaic Acid,FALSE,Please consult a dermatologist.,3
+Benzoyl Peroxide,Arbutin,FALSE,May cause irritation.,4
