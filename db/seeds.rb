@@ -9,45 +9,47 @@ require 'csv'
 
 
 
-puts "unpacking csv............."
-csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Skincare_Compatibility.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-puts "Done!"
-puts "Output::"
-puts "///////////////////////////////////////////////////////////"
-cr = []
-csv.each do |row|
-	cr << row.to_hash
-end
-count = 1
+def unpack_csv_and_seed_CR_table
+	puts "unpacking csv............."
+	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Skincare_Compatibility.csv'))
+	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+	puts "---------------------------------------------------------------"
+	puts "seed_CR_table......"
+
+	cr = []
+	csv.each do |row|
+		p cr << row.to_hash
+	end
+	count = 1
 
 
-cr.each do|r|
-	#g1 = IngredientGroup.search_by_name(r["name"]).first
-	#g2 = IngredientGroup.search_by_name(r["compared_to"]).first
-	#p "#{count}..g1:#{!g1.nil?}|------|g2:#{!g2.nil?}"
-	#count += 1
-	
-#	
-	
-	g1 = IngredientGroup.search_by_name(r["name"]).first
 
-	g2 = IngredientGroup.search_by_name(r["compared_to"]).first
-	rule = CompatibilityRule.new()
-	
-	rule.group_one_id = g1.id
+	cr.each do|r|
+		
+		g1 = IngredientGroup.search_by_name(r["name"]).first
 
-	rule.group_two_id = g2.id
+		g2 = IngredientGroup.search_by_name(r["compared_to"]).first
+		rule = CompatibilityRule.new()
+		
+		rule.group_one_id = g1.id
 
-	bool = (r["compatible"].downcase == "true")
+		rule.group_two_id = g2.id
 
-	rule.compatible = bool
+		bool = (r["compatible"].downcase == "true")
 
-	rule.reason = r["text"]
+		rule.compatible = bool
 
-	rule.rating = r["rating"]
+		rule.reason = r["text"]
 
-	rule.save
+		rule.rating = r["rating"]
+
+		rule.save
+
+		p "#{count}. #{rule}"
+		count += 1
+
+	end
+	puts "Done! Compatibility_Rule table has #{CompatibilityRule.count} instances"
 
 end
 #
@@ -58,168 +60,283 @@ end
 #terminal commands to use:
 #IngredientGroup.search_by_name("b h a")
 
+ing_grp = [
+	["Alpha-hydroxy acids (AHAs)",[
+  	"lactic acid / 2-hydroxypropionic acid",
+  	"glycolic acid / Hydroxyacetic Acid",
+  	"malic acid",
+  	"citric acid",
+  	"tartaric acid / Dihydroxysuccinic Acid",
+  	"Mandelic acid",
+  	"Malic Acid / Monohydroxysuccinic Acid / Hydroxysuccinic Acid",
+  	"Hydroxycaprylic Acid",
+		]
+	],
+	["Polyhydroxy acids (PHAs)",
+		[
+			"PHA / Polyhydroxy acids",
+			"Gluconolactone / gluconic acid",
+			"Galactose",
+			"Lactobionic acid"
+		]
+	],
+	["Beta-hydroxy acid (BHAs)",
+		[
+			"BHA / Beta hydroxy acids",
+			"salicylic acid", 
+			"salicylate",
+			"sodium salicylate", 
+			"willow extract / Salix alba",
+			"beta hydroxybutanoic acid",
+			"tropic acid",
+			"trethocanic acid",
+			"3-Hydroxypropionic Acid",
+			"betaine salicylate"
+		]
+
+	],
+	["Vitamin A",
+		[
+			"Vitamine A",
+      "Retinal / Retinaldehyde",
+      "Retinyl palmitate",
+      "Retinol", 
+      "Retinoic Acid",
+      "Tretinoin",
+      "Tazarotene", 
+      "Isotretinoin", 
+      "Adapalene"
+		]
+	],
+	["Vitamin C",
+		[
+	    "Vitamin C",
+      "L-ascorbic acid",
+      "sodium ascorbyl phosphate", 
+      "ascorbyl palmitate", 
+      "retinyl ascorbate", 
+      "tetrahexyldecyl ascorbate", 
+      "magnesium ascorbyl phosphate",
+      "Ascorbyl Tetra-Isopalmitate (VC-IP)",
+      "Ascorbyl Glucoside (AA-2G)",
+      "Ascorbyl 2-Phosphate 6-Palmitate (APPS)",
+      "3-O-Ethyl Ascorbate"
+    ]
+	],
+	["Vitamin B",
+		[
+		  "B5 / pantothenic acid / panthenol",
+			"B12 / cobalamin"
+		]
+	],
+	["Vitamin B3 / niacinamide",
+		["Vitamin B3 / niacinamide / nicotinamide"]
+	],
+	["Hyaluronic Acids",
+    [
+      "Hyalurionic acid / HA",
+    	"Hydrolysed hyaluronic acid",
+    	"Sodium acetylated hyaluronate",
+    	"Sodium hyaluronate",
+      "Glycoaminoglycane",
+      "Glycoaminoglycan",
+      "Hyaluran",
+      "Hyaluronan",
+      "Hyaluronate Sodium",
+      "Hylan"
+    ]
+	],
+	["Vitamin E",
+		[
+		  "Vitamin E",
+		  "Tocopheryl Acetate",
+		  "Tocopheryl Glucoside",
+		  "Tocopheryl Linoleate",
+		  "Tocopheryl Linoleate/Oleate",
+		  "Tocopheryl Nicotinate",
+		  "Tocopheryl Succinate",
+		  "Potassium Ascorbyl Tocopheryl Phosphate",
+		  "Sodium Tocopheryl Phosphate",
+			"Tocopherol Phosphate"
+		]
+	],
+	["Benzoyl Peroxide",
+		["Benzoyl Peroxide"]
+	],
+	["Hydroquinone",
+		[
+			"Hydroquinone"
+		]
+	],
+	["Azelaic Acid",
+		["Azelaic Acid"]
+	],
+	["Kojic Acid",
+		["Kojic Acid"]
+	],
+	["Ferulic Acid",
+		["Ferulic Acid"]
+
+	],
+	["Copper peptides",
+		["Copper peptides"]
+	],
+	["peptides",
+		[
+			"X-50 Myocept",
+			"Trifluoroacetyl tripeptide-2",
+			"Trylagen",
+			"Argireline",
+			"Palmitoyl tetrapeptide-28",
+			"Palmitoyl Tripeptide-38",
+			"Syn-Ake, XEP-30",
+			"Matrixyl-3000",
+			"Palmitoyl Pentapeptide-4",
+			"Palmitoyl Oligopeptide-7"
+		]
+
+	],
+	["Arbutin",
+		[
+			"Arbutin",
+			"Alpha-Arbutin / α-Arbutin",
+			"Beta-Arbutin / β-Arbutin"
+    ]
+	],
+	["Mushrooms",
+		[
+			"Shiitake (Lentinula edodes)",
+			"reishi mushrooms (Ganoderma lucidum)",
+			"chaga (Inonotus obliquus)",
+			"maitake (Grifola frondosa)",
+			"antrodia (Antrodia cinnamomea)",
+			"Cordyceps (Cordyceps sinensis)"
+		]			
+	],
+	["Caffeine",
+		[
+			"Caffeine",
+			"Caffeic acid",
+			"Paullinia cupana extract"
+		]
+
+	],
+	["Ceramide",
+		[
+			"ceramide AP / ceramide 6-II / ceramide 6 / α-hydroxy-N-stearoylphytosphingosine",
+			"Ceramide EOS / Ceramide 1",
+			"ceramide EOP / ceramide 9",
+			"ceramide NG",
+			"ceramide NP /  ceramide 3 / N-stearoyl phytosphingosine",
+			"ceramide NS",
+			"Phytosphinosine",
+			"sphingosine."
+		]
+
+	],
+	["Other",
+		[
+      "Ubiquinone",
+      "Coenzyme Q10",
+      "CoQ10",
+      "Palmitic acid  / Palm oil  / Acid Hexadecanoic / Acid Palmitic / Calcium Palmitate / Hexadecanoic Acid / Palmitate Calcium / Palmitate Sodium / Palmitic Acid / Sodium Palmitate",
+      "Stearic acid / Octadecanoic acid",
+      "oleyl stearate /  oleic acid / oleyl oleate or tallow",
+      "LA / Linoleic acid / omega-6 fatty acid / 18:2 cis-9,12",
+		  "Egcg / Epigallocatechin gallate  / green tea"
+		]
+	]
+]
+
+def add_ingredient_groups_and_ingredients(ing_grp)
+	ing_grp.each do |ig|
+		name = ig[0]
+		ings = ig[1]
+		igrp = IngredientGroup.create(name: name)
+		ings.each do |ing|
+			i = Ingredient.new(name: ing, ingredient_group_id: igrp.id)
+			i.save
+		end
+	end
+end
 
 
-
-#ingredient_groups = [
-#  "Alpha-hydroxy acids (AHAs)",
-#	"Polyhydroxy acids (PHAs)",
-#  "Beta-hydroxy acid (salicylic acid) (BHAs)",
-#	"Vitamin A",
-#	"Vitamin C",
-#	"Vitamin Bs / retinol", 
-#	"CoQ10",
-#	"Hyaluronic Acids",
-#	"Vitamin E",
-#	"Benzoyl Peroxide",
-#	"Hydroquinone",
-#	"Azelaic Acid",
-#]
 #
-#AHAs = [
-#  # "lactic acid / 2-hydroxypropionic acid",
-#  # "glycolic acid / Hydroxyacetic Acid",
-#  # "malic acid",
-#  # "citric acid",
-#  # "tartaric acid / Dihydroxysuccinic Acid",
-#  # "Mandelic acid",
-#  # "Malic Acid / Monohydroxysuccinic Acid",
-#  # "Hydroxycaprylic Acid",
-#  # "Hydroxypropionic Acid",
-#  "Hydroxysuccinic Acid"
-#]
-#
-#Polyhydroxy_acids = [
-#	# "Gluconolactone / gluconic acid",
-#	# "Galactose",
-#	"Lactobionic acid"
-#]
-#
-#Beta_hydroxy_acid = [
-#	# "salicylic acid", 
-#	# "salicylate",
-#	# "sodium salicylate", 
-#	# "willow extract / Salix alba",
-#	# "beta hydroxybutanoic acid",
-#	# "tropic acid",
-#	"trethocanic acid"
-#]
-#
-#Vitamin_A_Retinoids = [
-#  # "Retinal/Retinaldehyde",
-#	# "Retinyl palmitate",
-#	# "Retinol", 
-#	# "Retinoic Acid",
-#	# "Tretinoin,"
-#	# "Tazarotene", 
-#	# "Isotretinoin", 
-#	"Adapalene"
-#]
-#
-#Vitamin_C = [
-#	# "L-ascorbic acid",
-#	# "sodium ascorbyl phosphate", 
-#	# "ascorbyl palmitate", 
-#	# "retinyl ascorbate", 
-#	# "tetrahexyldecyl ascorbate", 
-#	# "magnesium ascorbyl phosphate",
-#	# "Ascorbyl Tetra-Isopalmitate (VC-IP)",
-#	# "Ascorbyl Glucoside (AA-2G)",
-#	# "Ascorbyl 2-Phosphate 6-Palmitate (APPS)",
-#	"3-O-Ethyl Ascorbate"
-#]
-#
-#Vitamin_Bs = [
-#	# "B3 niacinamide",
-#	# "B5 pantothenic acid",
-#	"B12 cobalamin"
-#]
-#
-#CoQ10 = [
-## "ubiquinone",
-## "Coenzyme Q10",
-#"CoQ10"
-#]
-#
-#
-#Hyalurionic_Acids = [
-#	# "Hydrolysed hyaluronic acid",
-#	# "Sodium acetylated hyaluronate",
-#	"Sodium hyaluronate"
-#]
-#
-#Vitamin_E = [
-#	# "Tocopheryl Acetate",
-#	# "Tocopheryl Glucoside",
-#	# "Tocopheryl Linoleate",
-#	# "Tocopheryl Linoleate/Oleate",
-#	# "Tocopheryl Nicotinate",
-#	# "Tocopheryl Succinate",
-#	# "Potassium Ascorbyl Tocopheryl Phosphate",
-#	# "Sodium Tocopheryl Phosphate",
-#	"Tocopherol Phosphate"
-#]
-#
-#ingreds = [
-#	"Hydroxysuccinic Acid",
-#	"Lactobionic acid",
-#	"trethocanic acid",
-#	"Adapalene",
-#	"3-O-Ethyl Ascorbate",
-#	"B12 cobalamin",
-#	"CoQ10",
-#	"Sodium hyaluronate",
-#	"Tocopherol Phosphate"
-#]
-#
-#products = [
-#	"Advanced Night Repair Eye Supercharged Complex",
-#	"Advanced Night Repair Synchronized Multi-Recovery Complex Serum",
-#	"The Inkey List - Glycolic Acid Toner",
-#	"SkinCeuticals - C E FERULIC® WITH 15% L-ASCORBIC ACID",
-#	"The Ordinary - Niacinamide 10% + Zinc 1%",
-#	"The Ordinary - AHA 30% + BHA 2% Peeling Solution"
-#]
-#
-#
-#
-#
-##Advanced_Night_Repair_Eye_Supercharged_Complex= [
-##
-##	"Methyl Trimethicone" ," Water-Aqua-Eau" , "Bifida Ferment Lysate" , #"Dimethicone" , "Dimethicone/Vinyl Dimethicone Crosspolymer" , "Propanediol" , #"Petrolatum" , "Sucrose" , "Algae Extract" , "Hypnea Musciformis (Algae) #Extract" , "Acrylamide/Sodium Acryloyldimethyltaurate Copolymer" , "Butylene #Glycol" , "Yeast Extract-Faex-Extrait De Levure" , "Tripeptide-32" , "Sodium #Hyaluronate" , "Lactobacillus Ferment" , "Sodium Rna" , "Citrullus Vulgaris #(Watermelon) Fruit Extract" , "Poria Cocos Sclerotium Extract" , "Lens #Esculenta (Lentil) Fruit Extract" , "Pyrus Malus (Apple) Fruit Extract" , #"Anthemis Nobilis (Chamomile) Flower Extract" , "Narcissus Tazetta Bulb #Extract" , "Caffeine" , "Sodium Pca" , "Tocopheryl Acetate" , #"Phytosphingosine" , "Trehalose" , "Glycine Soja (Soybean) Seed Extract" , #I"sopropyl Jojobate" , "Betula Alba (Birch) Extract", "Peg/Ppg-18/18 #Dimethicone" , "Ethylhexylglycerin" , "Gelidiella Acerosa Extract" , #"Tromethamine" , "Polysorbate 80" , "Artemia Extract" , "Hydrolyzed Algin" , #"Isohexadecane" , "Jojoba Alcohol" , "Jojoba Esters" , "Glycerin" , "Acrylates/#C10-30 Alkyl Acrylate Crosspolymer" , "Hydrogenated Lecithin" , "Polysorbate #40" , "Caprylyl Glycol" , "Sodium Lactate" , "Lecithin" , "Bht" ," Potassium #Sorbate" , "Phenoxyethanol" , "Iron Oxides (Ci 77491)" , I"ron Oxides (Ci #77492) ILN45118" 
-##]
-#
-#ingredient_groups.each do |ig|
-#	IngredientGroup.create(name:ig)
-#end
-#id = 1
-## ingreds.each do |ing|
-## 	ingredient = Ingredient.new(name: ing)
-## 	ingredient["ingredient_group_id"] = id
-## 	ingredient.save
-## 	id += 1
-## end
-#ingredients = Ingredient.all
-#
-#products.each do |name|
-#	product = Product.new(name: name)
-#	product["brand"] = ["SKII","ESTE LAUDER", "MAC", "GUCCI"].sample
-#	product.save
-#	id = 1
-#	5.times do
-#		pi = ProductIngredient.new()
-#		ig = Ingredient.find(id)
-#		pi["product_id"] = product.id
-#		pi["ingredient_id"] = ig.id
-#		pi["rank"] = [1,2,3,4,5,6,7,8,9].sample
-#		pi.save
-#		id += 1
-#	end
-#end
-#
-###################################################################################################
+#["SK-II","ESTEE LAUDER", "The Inkey List" "The Ordinary", "COSRX", "SkinCeuticals"]
+products = [
+	["Advanced Night Repair Eye Supercharged Complex","ESTEE LAUDER",	
+		[
+			"Methyl Trimethicone" ," Water" , "Bifida Ferment Lysate" , "Dimethicone" , "Dimethicone/Vinyl Dimethicone Crosspolymer" , 	"Propanediol" , "Petrolatum" , "Sucrose" , "Algae Extract" , "Hypnea Musciformis (Algae) Extract" , "Acrylamide/Sodium 	Acryloyldimethyltaurate Copolymer" , "Butylene Glycol" , "Yeast Extract-Faex-Extrait De Levure" , "Tripeptide-32" , "Sodium 	Hyaluronate" , "Lactobacillus Ferment" , "Sodium Rna" , "Citrullus Vulgaris (Watermelon) Fruit Extract" , "Poria Cocos Sclerotium 	Extract" , "Lens Esculenta (Lentil) Fruit Extract" , "Pyrus Malus (Apple) Fruit Extract" , "Anthemis Nobilis (Chamomile) Flower 	Extract" , "Narcissus Tazetta Bulb Extract" , "Caffeine" , "Sodium Pca" , "Tocopheryl Acetate" , "Phytosphingosine" , "Trehalose" , 	"Glycine Soja (Soybean) Seed Extract" , "Isopropyl Jojobate" , "Betula Alba (Birch) Extract", "Peg/Ppg-18/18 Dimethicone" , 	"Ethylhexylglycerin" , "Gelidiella Acerosa Extract" , "Tromethamine" , "Polysorbate 80" , "Artemia Extract" , "Hydrolyzed Algin" , 	"Isohexadecane" , "Jojoba Alcohol" , "Jojoba Esters" , "Glycerin" , "Acrylates/#C10-30 Alkyl Acrylate Crosspolymer" , "Hydrogenated 	Lecithin" , "Polysorbate 40" , "Caprylyl Glycol" , "Sodium Lactate" , "Lecithin" , "Bht" ," Potassium Sorbate" , "Phenoxyethanol" 	, "Iron Oxides (Ci 77491)" , "Iron Oxides (Ci #77492) ILN45118" 
+		]
+	],
+	["Advanced Night Repair Synchronized Multi-Recovery Complex Serum","ESTEE LAUDER",
+		[
+			"water", "Bifida Ferment Lysate", "Peg-8", "Propanediol", "Bis-Peg-18 Methyl Ether Dimethyl Silane", "Methyl Gluceth-20", "Glycereth-26", "Peg-75", "Butylene Glycol", "Adansonia Digitata Seed Extract", "Tripeptide-32", "Sodium Hyaluronate", "Yeast Extract / Faex / Extrait De Levure", "Lactobacillus Ferment", "Cola Acuminata (Kola) Seed Extract", "Anthemis Nobilis (Chamomile) Flower Extract", "Hydrolyzed Algin", "Pantethine", "Caffeine", "Lecithin", "Sodium Rna", "Bisabolol", "Squalane", "Glycerin", "Oleth-3 Phosphate", "Caprylyl Glycol", "Oleth-3", "Oleth-5", "Choleth-24", "Hydrogenated Lecithin", "Jojoba Wax Peg-120 Esters", "Ceteth-24", "Tocopheryl Acetate", "Carbomer", "Triethanolamine", "Tetrasodium Edta", "Bht", "Xanthan Gum", "Potassium Sorbate", "Disodium Edta", "Phenoxyethanol", "Red 4 (Ci 14700)", "Yellow 5 (Ci 19140)"
+		]
+	],
+	["Glycolic Acid Toner","The Inkey List",
+		[
+			"Water", "Glycolic Acid", "Propanediol", "Hamamelis Virginiana (Witch Hazel) Water", "Sodium Hydroxide", "Butylene Glycol", 	"Phenoxyethanol", "Alcohol", "PPG-26-Buteth-26", "Betaine", "PEG-40 Hydrogenated Castor Oil", "Boerhavia Diffusa Root Extract", "Ethylhexylglycerin", "Trisodium Ethylenediamine Disuccinate"
+		]
+	],
+	["C E FERULIC® WITH 15% L-ASCORBIC ACID","SkinCeuticals",
+	  [
+			"water", "ethoxydiglycol", "ascorbic acid", "glycerin", "propylene glycol", "laureth-23", "phenoxyethanol", "tocopherol", 		"triethanolamine", "ferulic acid", "panthenol", "sodium hyaluronate"
+		]
+	],
+	["Niacinamide 10% + Zinc 1%","The Ordinary",
+	  [
+			"Water", "Niacinamide", "Pentylene Glycol", "Zinc PCA", "Dimethyl Isosorbide", "Tamarindus Indica Seed Gum", "Xanthan gum","Isoceteth-20", "Ethoxydiglycol", "Phenoxyethanol", "Chlorphenesin"
+		]
+	],
+	["AHA 30% + BHA 2% Peeling Solution","The Ordinary",
+		[
+			"Glycolic Acid", "Water", "Aloe Barbadensis Leaf Water", "Sodium Hydroxide", "Daucus Carota Sativa Extract", "Propanediol", 	"Cocamidopropyl Dimethylamine", "Salicylic Acid", "Lactic Acid", "Tartaric Acid", "Citric Acid", "Panthenol", "Sodium 	Hyaluronate Crosspolymer", "Tasmannia Lanceolata Fruit / Leaf Extract", "Glycerin, Pentylene Glycol", "Xanthan gum", 	"Polysorbate 20", "Trisodium Ethylenediamine Disuccinate", "Potassium Sorbate", "Sodium Benzoate", "Ethylhexylglycerin", "1,	2-Hexanediol", "Caprylyl Glycol."
+		]
+	]
+]
 
 
+def add_products_and_product_ingredients(products)
+	products.each do |p|
+		name = p[0]
+		brand = p[1]
+		p_ings = p[2]
+		pr = Product.create(name: name, brand: brand)
+		p "product ======> #{pr.name}"
+		p_ings.each.with_index do |pi, idx|
+			p "pi => #{pi}"
+			gr = IngredientGroup.search_by_name(pi).first
+			other = IngredientGroup.search_by_name("other").first
+			p "gr => #{gr.name}"
+			ig = ""
+			ingredients = Ingredient.all
+			if gr.nil?
+				ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+				p "gr-nil=ig => #{ig.name}"
+			
+			else
+				if Ingredient.search_by_name(pi).empty?
+					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+					p "ig-nil=>#{ig}"
+				else
+					ig = Ingredient.search_by_name(pi).first
+					p "gr=ig => #{ig.name}"
+				end
+			end
+
+			pri = ProductIngredient.new()
+			pri.product_id = pr.id
+			pri.ingredient_id = ig.id
+			pri.rank = idx
+			pri.save
+		end
+	end
+end
+
+add_ingredient_groups_and_ingredients(ing_grp)
+add_products_and_product_ingredients(products)
+unpack_csv_and_seed_CR_table
 
 
 

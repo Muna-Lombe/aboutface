@@ -1,42 +1,152 @@
 name,compared_to,compatible,text,rating
 Vitamin A,Vitamin A,FALSE,May be irritating for sensitive skin.,2
-Vitamin A,Vitamin B3 / Niacinamide,TRUE,Pairs well together,1
-Vitamin A,Vitamin C,FALSE,Ingredients may not be effective together,3
-Vitamin A,Alpha-hydroxy acids (AHAs),FALSE,May cause irritation,4
-Vitamin A,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May cause irritation,4
-Vitamin A,Polyhydroxy acids (PHAs),FALSE,May cause irritation,4
-Vitamin A,Benzoyl Peroxide,FALSE,"Ingredients may not be effective together, although Tretinoin and benzoyl peroxide will still be effective.",3
-Vitamin A,Hydroquinone,TRUE,Do not use for more than three months. Please consult a dermatologist.,1
+Vitamin A  ,Vitamin B3 / Niacinamide,TRUE,Pairs well together.,1
+Vitamin A,Vitamin B,TRUE,No incompatibility found.,
+Vitamin A ,Vitamin C,FALSE,Ingredients may not be effective together.,3
+Vitamin A ,AHA,FALSE,May cause irritation.,4
+Vitamin A ,BHA,FALSE,May cause irritation.,4
+Vitamin A ,PHA,FALSE,May cause irritation.,4
+Vitamin A ,Benzoyl Peroxide,FALSE,"Ingredients may not be effective together, although Tretinoin and benzoyl peroxide will still be effective.",3
+Vitamin A ,Hydroquinone,TRUE,Do not use for more than three months. Please consult a dermatologist.,1
 Vitamin A,Azelaic Acid,TRUE,Use of Vitamin A can enhnace effectiveness of Azelaic Acid.,1
-Vitamin B3 / Niacinamide,Alpha-hydroxy acids (AHAs),FALSE,"Unless combined in specially formulated products, avoid mixing niacinamide with Alpha-hydroxy acids (AHAs) products as it causes flushing and redness. Consult a dermatologist for information about product layering these ingredients in your skincare routine.",5
-Vitamin B3/ Niacinamide,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May cause irritation as well as reduce the efficacy of the active ingredients.,4
-Vitamin B3 / Niacinamide,Polyhydroxy acids (PHAs),FALSE,Not enough data on  combining Polyhydroxy acids (PHAs) and niacinamide. Consult a dermatologist or use products with caution.,3
+Vitamin A,Bakuchiol,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
+Vitamin A,Kojic Acid,TRUE,No incompatibility found.,
+Vitamin A,Arbutin,TRUE,No incompatibility found.,
+Vitamin A,Ferulic Acid,TRUE,No incompatibility found.,
+Vitamin A,Copper Peptide,FALSE,Using copper peptides with retinols may cause irritation in already damaged skin.,
+Vitamin A,Peptides,TRUE,No incompatibility found.,
+Vitamin A,Mushrooms,TRUE,No incompatibility found.,
+Vitamin A,Ceramides,TRUE,No incompatibility found.,
+Vitamin A,Minerals,TRUE,No incompatibility found.,
+Vitamin B,Vitamin A,FALSE,May be irritating for sensitive skin.,
+Vitamin B,Vitamin B,TRUE,No incompatibility found.,
+Vitamin B,Vitamin B3 / Niacinamide,TRUE,No incompatibility found.,
+Vitamin B,AHA,TRUE,No incompatibility found.,
+Vitamin B,BHA,TRUE,No incompatibility found.,
+Vitamin B,PHA,TRUE,No incompatibility found.,
+Vitamin B,Benzoyl Peroxide,TRUE,No incompatibility found.,
+Vitamin B,Hydroquinone,TRUE,No incompatibility found.,
+Vitamin B,Azelaic Acid,TRUE,No incompatibility found.,
+Vitamin B,Kojic Acid,TRUE,No incompatibility found.,
+Vitamin B,Bakuchiol,TRUE,No incompatibility found.,
+Vitamin B,Arbutin,TRUE,No incompatibility found.,
+Vitamin B,Ferulic Acid,TRUE,No incompatibility found.,
+Vitamin B,Copper Peptide,TRUE,No incompatibility found.,
+Vitamin B,Peptides,TRUE,No incompatibility found.,
+Vitamin B,Mushrooms,TRUE,No incompatibility found.,
+Vitamin B,Ceramides,TRUE,No incompatibility found.,
+Vitamin B,Minerals,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Vitamin A,TRUE,Pairs well together.,
+Vitamin B3 / Niacinamide,Vitamin B,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Vitamin B3 / Niacinamide ,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Vitamin C,FALSE,Ingredients may not be effective together.,
+Vitamin B3 / Niacinamide,AHA,FALSE,"Unless combined in specially formulated products, avoid mixing niacinamide with AHA products as it causes flushing and redness. Consult a dermatologist for information about product layering these ingredients in your skincare routine. ",5
+Vitamin B3/ Niacinamide,BHA,FALSE,May cause irritation as well as reduce the efficacy of the active ingredients.,4
+Vitamin B3 / Niacinamide,PHA,FALSE,Not enough data on  combining PHA and niacinamide. Consult a dermatologist or use products with caution.,3
 Vitamin B3 / Niacinamide,Benzoyl Peroxide,TRUE,Niacinimaide can help soothe irritation caused by Benzoyl Peroxide.,1
-Vitamin B3 / Niacinamide,Arbutin,FALSE,Avoid with The Ordinary Niacinamide Powder or with niacinamide in high concentrations due to pH conflict.,3
-Vitamin B5,Vitamin C,TRUE,Vitamin B5 can boost the efficacy of Vitamin C,1
-Vitamin C,Alpha-hydroxy acids (AHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Vitamin C,Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Vitamin C,Polyhydroxy acids (PHAs),FALSE,Ingredients may not be effective together.,3
+Vitamin B3 / Niacinamide,Hydroquinone,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Azelaic Acid,TRUE,The soothing property of Niacinamide pairs well with Azelaic Acid.,
+Vitamin B3 / Niacinamide,Kojic Acid,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Bakuchiol,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Ferulic Acid,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Copper Peptide,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Peptides,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Mushrooms ,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide,Ceramides,TRUE,No incompatibility found.,
+Vitamin B3 / Niacinamide ,Arbutin,FALSE,Avoid with The Ordinary Niacinamide Powder or with niacinamide in high concentrations due to pH conflict. ,3
+Vitamin B3 / Niacinamide ,Minerals,TRUE,No incompatibility found.,
+Vitamin C,Vitamin A,FALSE,Ingredients may not be effective together.,
+Vitamin C,Vitamin B3 / Niacinamide ,TRUE,No incompatibility found.,
+Vitamin C,Vitamin B,TRUE,Vitamin B5 can boost the efficacy of Vitamin C.,1
+Vitamin C,Vitamin C,TRUE,No incompatibility found.,
+Vitamin C,AHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+Vitamin C,BHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+Vitamin C,PHA,FALSE,Ingredients may not be effective together.,3
 Vitamin C,Benzoyl Peroxide,FALSE,Ingredients may not be effective together.,3
-Vitamin C,Azelaic Acid,FALSE,May cause irritation.,
+Vitamin C,Hydroquinone,TRUE,No incompatibility found.,
+Vitamin C,Azelaic Acid,FALSE,"While there is no chemical incompatibility, Vitamin C is more effective as an antioxidant in the morning, whereas Azelaic Acid is more effective at night.",
+Vitamin C,Kojic Acid,TRUE,No incompatibility found.,
+Vitamin C,Bakuchiol,TRUE,No incompatibility found.,
 Vitamin C,Arbutin,TRUE,Both Vitamin C and Alpha Arbutin work along the same pathway and thus go very well with together.,1
-Alpha-hydroxy acids (AHAs),Alpha-hydroxy acids (AHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Alpha-hydroxy acids (AHAs),Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,Avoid salicylic acid and glycolic acid together as they may cause irritation. Alpha-hydroxy acids (AHAs) and Beta-hydroxy acid (salicylic acid) (BHAs)s together may be irritating for sensitive skin.,2
-Alpha-hydroxy acids (AHAs),Polyhydroxy acids (PHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Alpha-hydroxy acids (AHAs),Benzoyl Peroxide,FALSE,May cause irritation.,4
-Alpha-hydroxy acids (AHAs),Hydroquinone,FALSE,May cause irritation.,4
-Alpha-hydroxy acids (AHAs),Azelaic Acid,FALSE,May cause irritation.,4
-Alpha-hydroxy acids (AHAs),Bakuchiol,FALSE,Combining with Glycolic Acid may not be effective.,3
-Alpha-hydroxy acids (AHAs),Arbutin,TRUE,Combining Alpha Arbutin with Glycolic Acid or Lactic Acid increases efficacy of Alpha Arbutin,1
-Beta-hydroxy acid (salicylic acid) (BHAs),Beta-hydroxy acid (salicylic acid) (BHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Beta-hydroxy acid (salicylic acid) (BHAs),Polyhydroxy acids (PHAs),FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Beta-hydroxy acid (salicylic acid) (BHAs),Benzoyl Peroxide,FALSE,May cause irritation.,4
-Beta-hydroxy acid (salicylic acid) (BHAs),Hydroquinone,TRUE,Use cautiously and in small amounts. Salicylic Acid can prevent build up of dead skin cells as Hydroquinone kills hyper-pigmented skin cells.,3
-Beta-hydroxy acid (salicylic acid) (BHAs),Azelaic Acid,FALSE,May cause irritation.,4
-Beta-hydroxy acid (salicylic acid) (BHAs),Arbutin,TRUE,Combining with Beta-hydroxy acid (salicylic acid) (BHAs) such as Salicylic Acid can incread efficacy of Alpha Arbutin.,1
-Polyhydroxy acids (PHAs),Benzoyl Peroxide,FALSE,May be irritating for sensitive skin. Consult a dermatologist,2
-Polyhydroxy acids (PHAs),Azelaic Acid,FALSE,Not enough data on combining Polyhydroxy acids (PHAs) products and Azelaic Acid. Consult a dermatologist.,3
+Vitamin C,Ferulic Acid,TRUE,Ferulic Acid enhances the efficacy of Vitamin C.,
+Vitamin C,Copper Peptide,FALSE,Using copper peptides with vitamin c derivatives may decrease effectiveness of ingredients.,
+Vitamin C,Peptides,TRUE,No incompatibility found.,
+Vitamin C,Mushrooms,TRUE,No incompatibility found.,
+Vitamin C,Ceramides,TRUE,No incompatibility found.,
+Vitamin C,Minerals,TRUE,No incompatibility found.,
+AHA,Vitamin A,FALSE,May cause irritation.,
+AHA,Vitamin B,TRUE,No incompatibility found.,
+AHA,Vitamin B3 / Niacinamide ,FALSE,"Unless combined in specially formulated products, avoid mixing niacinamide with AHA products as it causes flushing and redness. Consult a dermatologist for information about product layering these ingredients in your skincare routine. ",
+AHA,Vitamin C,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
+AHA,AHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+AHA,BHA,FALSE, Avoid salicylic acid and glycolic acid together as they may cause irritation. AHA and BHAs together may be irritating for sensitive skin.,2
+AHA,PHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+AHA,Benzoyl Peroxide,FALSE,May cause irritation.,4
+AHA,Hydroquinone,FALSE,May cause irritation.,4
+AHA,Azelaic Acid,FALSE,May cause irritation.,4
+AHA,Kojic Acid,TRUE,Kojic Acid works well with glycolic acid.,
+AHA,Bakuchiol,FALSE,Combining with Glycolic Acid may not be effective.,3
+AHA,Arbutin,TRUE,Combining Alpha Arbutin with Glycolic Acid or Lactic Acid increases efficacy of Alpha Arbutin,1
+AHA,Ferulic Acid,TRUE,No incompatibility found.,
+AHA,Copper Peptide,FALSE,Using copper peptides with AHA products may decrease effectiveness of ingredients.,
+AHA,Peptides,FALSE,Using peptides with AHA products may decrease effectiveness of ingredients.,
+AHA,Mushrooms,TRUE,No incompatibility found.,
+AHA,Ceramides,TRUE,No incompatibility found.,
+AHA,Minerals,TRUE,No incompatibility found.,
+BHA,Vitamin A,FALSE,May cause irritation.,
+BHA,Vitamin B,TRUE,No incompatibility found.,
+BHA,Vitamin B3 / Niacinamide ,FALSE,May cause irritation as well as reduce the efficacy of the active ingredients.,
+BHA,Vitamin C,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
+BHA,AHA,FALSE, Avoid salicylic acid and glycolic acid together as they may cause irritation. AHA and BHAs together may be irritating for sensitive skin.,
+BHA,BHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+BHA,PHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+BHA,Benzoyl Peroxide,FALSE,May cause irritation.,4
+BHA,Hydroquinone,TRUE,Use cautiously and in small amounts. Salicylic Acid can prevent build up of dead skin cells as Hydroquinone kills hyper-pigmented skin cells. ,3
+BHA,Azelaic Acid,FALSE,May cause irritation.,4
+BHA,Kojic Acid,TRUE,No incompatibility found.,
+BHA,Bakuchiol,TRUE,Bakuchiol works well with salicylic acid to fight acne.,
+BHA,Arbutin,TRUE,Combining with BHA such as Salicylic Acid can increase efficacy of Alpha Arbutin.,1
+BHA,Ferulic Acid,FALSE,Avoid using Ferulic Acid with Salycilic Acid as it may cause irritation.,
+BHA,Copper Peptide,FALSE,Using copper peptides with BHA products may decrease effectiveness of ingredients.,
+BHA,Peptides,FALSE,Using peptides with BHA products may decrease effectiveness of ingredients.,
+BHA,Mushrooms,TRUE,No incompatibility found.,
+BHA,Ceramides,TRUE,No incompatibility found.,
+BHA,Minerals,TRUE,No incompatibility found.,
+PHA,Vitamin A,FALSE,May cause irritation.,
+PHA,Vitamin B,TRUE,No incompatibility found.,
+PHA,Vitamin B3 / Niacinamide ,FALSE,Not enough data on  combining PHA and niacinamide. Consult a dermatologist or use products with caution.,
+PHA,Vitamin C,FALSE,Ingredients may not be effective together.,
+PHA,AHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
+PHA,BHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
+PHA,PHA,TRUE,No incompatibility found.,
+PHA,Benzoyl Peroxide,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,2
+PHA,Azelaic Acid,FALSE,Not enough data on combining PHA products and Azelaic Acid. Consult a dermatologist.,3
+PHA,Hydroquinone,TRUE,No incompatibility found.,
+PHA,Kojic Acid,TRUE,No incompatibility found.,
+PHA,Bakuchiol,TRUE,"PHAs and Bakuchiol may work well together for sensitive skin, as they are more gentle than AHAs and Retinols.",
+PHA,Arbutin,TRUE,No incompatibility found.,
+PHA,Ferulic Acid,TRUE,No incompatibility found.,
+PHA,Copper Peptide,TRUE,No incompatibility found.,
+PHA,Peptides,TRUE,No incompatibility found.,
+PHA,Mushrooms,TRUE,No incompatibility found.,
+PHA,Ceramides,TRUE,No incompatibility found.,
+PHA,Minerals,TRUE,No incompatibility found,
+Benzoyl Peroxide,Vitamin A,FALSE,"Ingredients may not be effective together, although Tretinoin and benzoyl peroxide will still be effective.",
+Benzoyl Peroxide,Vitamin B,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Vitamin B3 / Niacinamide,TRUE,Niacinimaide can help soothe irritation caused by Benzoyl Peroxide.,
+Benzoyl Peroxide,Vitamin C,FALSE,Ingredients may not be effective together.,
+Benzoyl Peroxide,AHA,FALSE,May cause irritation.,
+Benzoyl Peroxide,BHA,FALSE,May cause irritation.,
+Benzoyl Peroxide,PHA,FALSE,May be irritating for sensitive skin. Consult a dermatologist.,
 Benzoyl Peroxide,Benzoyl Peroxide,FALSE,May cause irritaiton.,4
 Benzoyl Peroxide,Hydroquinone,FALSE,"Do not use Hydroquinone with any peroxide product, including Benzoyl Peroxide, Hydrogen Peroxide, or Resorcinol as it will stain skin.",5
 Benzoyl Peroxide,Azelaic Acid,FALSE,Please consult a dermatologist.,3
+Benzoyl Peroxide,Kojic Acid,TRUE,No incompatibility found.,
 Benzoyl Peroxide,Arbutin,FALSE,May cause irritation.,4
+Benzoyl Peroxide,Bakuchiol,TRUE,Benzoyl Peroxide and Bakuchiol may work well together to fight acne.,
+Benzoyl Peroxide,Ferulic Acid,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Copper Peptide,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Peptides,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Mushrooms,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Ceramides,TRUE,No incompatibility found.,
+Benzoyl Peroxide,Minerals,TRUE,No incompatibility found.,
