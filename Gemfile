@@ -30,6 +30,7 @@ gem 'devise'
 gem 'tiddle'
 gem 'dotenv-rails'
 gem 'rest-client'
+gem 'rack-utf8_sanitizer'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

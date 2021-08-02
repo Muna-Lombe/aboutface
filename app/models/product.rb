@@ -14,6 +14,8 @@ class Product < ApplicationRecord
       ingredients: [:name],
       ingredient_groups: [:name ]
     },
+    # using: [:trigram]
+
     using: {
       trigram: {
         word_similarity: true

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         post 'manual_login', to: "user_sessions#manual_create"
       end
       resources :users, only: [:show ]
+      get 'products/compare', to: "products#compare", as: :compare
       resources :products, only: [:index, :show ]
       resources :routines, only: [:index, :show, :create, :update, :destroy ]
       

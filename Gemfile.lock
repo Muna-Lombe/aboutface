@@ -144,6 +144,8 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rack-utf8_sanitizer (1.7.0)
+      rack (>= 1.0, < 3.0)
     rails (6.1.4)
       actioncable (= 6.1.4)
       actionmailbox (= 6.1.4)
@@ -257,6 +259,7 @@ DEPENDENCIES
   pg_search (~> 2.3.0)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
+  rack-utf8_sanitizer
   rails (~> 6.1.4)
   rest-client
   sass-rails (>= 6)
