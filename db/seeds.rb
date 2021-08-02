@@ -18,19 +18,18 @@ def unpack_csv_and_seed_CR_table
 
 	cr = []
 	csv.each do |row|
-		p cr << row.to_hash
+		cr << row.to_hash
 	end
 	count = 1
 
 
 
 	cr.each do|r|
-		
 		g1 = IngredientGroup.search_by_name(r["name"]).first
 
 		g2 = IngredientGroup.search_by_name(r["compared_to"]).first
 		rule = CompatibilityRule.new()
-		
+
 		rule.group_one_id = g1.id
 
 		rule.group_two_id = g2.id
@@ -61,15 +60,16 @@ end
 #IngredientGroup.search_by_name("b h a")
 
 ing_grp = [
-	["Alpha-hydroxy acids (AHAs)",[
-  	"lactic acid / 2-hydroxypropionic acid",
-  	"glycolic acid / Hydroxyacetic Acid",
-  	"malic acid",
-  	"citric acid",
-  	"tartaric acid / Dihydroxysuccinic Acid",
-  	"Mandelic acid",
-  	"Malic Acid / Monohydroxysuccinic Acid / Hydroxysuccinic Acid",
-  	"Hydroxycaprylic Acid",
+	["Alpha-hydroxy acids (AHAs)",
+		[
+			"lactic acid / 2-hydroxypropionic acid",
+			"glycolic acid / Hydroxyacetic Acid",
+			"malic acid",
+			"citric acid",
+			"tartaric acid / Dihydroxysuccinic Acid",
+			"Mandelic acid",
+			"Malic Acid / Monohydroxysuccinic Acid / Hydroxysuccinic Acid",
+			"Hydroxycaprylic Acid",
 		]
 	],
 	["Polyhydroxy acids (PHAs)",
@@ -78,6 +78,15 @@ ing_grp = [
 			"Gluconolactone / gluconic acid",
 			"Galactose",
 			"Lactobionic acid"
+		]
+	],
+	["Minerals",
+		[
+			"Zinc oxide",
+			"Titanium dioxide",
+			"Selenium",
+			"Mica",
+			"Iron oxide"
 		]
 	],
 	["Beta-hydroxy acid (BHAs)",
@@ -181,7 +190,10 @@ ing_grp = [
 	["Copper peptides",
 		["Copper peptides"]
 	],
-	["peptides",
+	["Bakuchiol",
+		["Bakuchiol"]
+	],
+	["General peptides",
 		[
 			"X-50 Myocept",
 			"Trifluoroacetyl tripeptide-2",
@@ -249,11 +261,15 @@ ing_grp = [
 ]
 
 def add_ingredient_groups_and_ingredients(ing_grp)
+	p "Adding Ingredient groups......"
+
 	ing_grp.each do |ig|
 		name = ig[0]
 		ings = ig[1]
 		igrp = IngredientGroup.create(name: name)
 		ings.each do |ing|
+			p "Adding Ingredients......"
+
 			i = Ingredient.new(name: ing, ingredient_group_id: igrp.id)
 			i.save
 		end
@@ -298,30 +314,27 @@ products = [
 
 
 def add_products_and_product_ingredients(products)
+	p "Adding products......"
 	products.each do |p|
 		name = p[0]
 		brand = p[1]
 		p_ings = p[2]
 		pr = Product.create(name: name, brand: brand)
-		p "product ======> #{pr.name}"
 		p_ings.each.with_index do |pi, idx|
-			p "pi => #{pi}"
+			p "Adding product ingredients......"
+
 			gr = IngredientGroup.search_by_name(pi).first
 			other = IngredientGroup.search_by_name("other").first
-			p "gr => #{gr.name}"
+			
 			ig = ""
 			ingredients = Ingredient.all
 			if gr.nil?
 				ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-				p "gr-nil=ig => #{ig.name}"
-			
 			else
 				if Ingredient.search_by_name(pi).empty?
 					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-					p "ig-nil=>#{ig}"
 				else
 					ig = Ingredient.search_by_name(pi).first
-					p "gr=ig => #{ig.name}"
 				end
 			end
 

@@ -7,9 +7,9 @@ class Ingredient < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_name,
     against: :name,
-    # associated_against: {
-    #   ingredients: [:name]
-    # },
+    associated_against: {
+      product_ingredients: [:product_id]
+    },
     
     using: {
       trigram: {
