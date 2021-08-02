@@ -313,16 +313,35 @@ products = [
 ]
 
 
-def add_products_and_product_ingredients(products)
+def add_products_and_product_ingredients
+	puts "unpacking csv............."
+	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Products.csv'))
+	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+	puts "---------------------------------------------------------------"
+	puts "seed_CR_table......"
+
+	products = []
+	rows = []
+	csv.each do |row|
+		row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(",").map{|ia| ia =ia.slice(1..-2)}
+		# ingredients_array.each do|ia|
+		# 	ia = ia.slice(1..-2)
+		# end
+		rows << row
+		products << row.to_hash
+	end
+	count = 1
+	
 	p "Adding products......"
+
 	products.each do |p|
-		name = p[0]
-		brand = p[1]
-		p_ings = p[2]
+		name = p["name"]
+		brand = p["brand"]
+		p_ings = p["ingredients"]
 		pr = Product.create(name: name, brand: brand)
+
 		p_ings.each.with_index do |pi, idx|
 			p "Adding product ingredients......"
-
 			gr = IngredientGroup.search_by_name(pi).first
 			other = IngredientGroup.search_by_name("other").first
 			
@@ -344,12 +363,13 @@ def add_products_and_product_ingredients(products)
 			pri.rank = idx
 			pri.save
 		end
+	
 	end
 end
 
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients(products)
-unpack_csv_and_seed_CR_table
+#add_ingredient_groups_and_ingredients(ing_grp)
+add_products_and_product_ingredients
+#unpack_csv_and_seed_CR_table
 
 
 

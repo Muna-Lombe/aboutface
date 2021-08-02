@@ -1,6 +1,5 @@
 class Api::V1::RoutinesController <  Api::V1::BaseController
   before_action :set_routine, only: [:show, :update, :destroy]
-  before_action :set_user, only: [:index, :create]
   def index
       @routines = current_user.routines
       render json: @routines, each_serializer: RoutineSerializer
