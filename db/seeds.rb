@@ -401,16 +401,30 @@ def add_products_and_product_ingredients_from_csv
 end
 
 def add_product_photos
+	products = Product.all
+	products.each do |product|
+		name = product.name
+		if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
+			name = "SkinCeuticals Triple Lipid Restore"
+		elsif name == "AHA/BHA Clarifying Treatment Toner"
+			name = "AHA BHA Clarifying Treatment Toner"
+		end
+#		file =  File.read(Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png"))
+		file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
 
-	file = URI.open('	LINK_TO_LOCAL_PHOTOS')
-	article = Article.new(title: 'NES', body: "A great console")
-	article.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+		# p "#{name}===>#{file}"
+		product.photo.attach(io: File.open(file), filename: "#{product.name}.png", content_type: 'image/png')
+	end
+
+	
 end
 
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
-unpack_csv_and_seed_CR_table
+
+add_product_photos
+# add_ingredient_groups_and_ingredients(ing_grp)
+# add_products_and_product_ingredients_from_local(products)
+# add_products_and_product_ingredients_from_csv
+# unpack_csv_and_seed_CR_table
 
 
 
