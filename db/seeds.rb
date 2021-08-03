@@ -1,4 +1,5 @@
 require 'csv'
+require "open-uri"
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -397,6 +398,13 @@ def add_products_and_product_ingredients_from_csv
 		end
 	
 	end
+end
+
+def add_product_photos
+
+	file = URI.open('	LINK_TO_LOCAL_PHOTOS')
+	article = Article.new(title: 'NES', body: "A great console")
+	article.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
 end
 
 add_ingredient_groups_and_ingredients(ing_grp)
