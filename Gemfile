@@ -31,6 +31,8 @@ gem 'tiddle'
 gem 'dotenv-rails'
 gem 'rest-client'
 gem 'rack-utf8_sanitizer'
+gem 'activestorage-aliyun'
+gem 'image_processing'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
