@@ -263,7 +263,6 @@ ing_grp = [
 
 def add_ingredient_groups_and_ingredients(ing_grp)
 	p "Adding Ingredient groups......"
-
 	ing_grp.each do |ig|
 		name = ig[0]
 		ings = ig[1]
@@ -315,9 +314,10 @@ products = [
 
 def add_products_and_product_ingredients_from_local(products)
 	products.each do |p|
-		name = p["name"]
-		brand = p["brand"]
-		p_ings = p["ingredients"]
+
+		name = p[0]
+		brand = p[1]
+		p_ings = p[2]
 		pr = Product.create(name: name, brand: brand)
 
 		p_ings.each.with_index do |pi, idx|
@@ -421,7 +421,7 @@ end
 
 
 
-add_ingredient_groups_and_ingredients(ing_grp)
+# add_ingredient_groups_and_ingredients(ing_grp)
 add_products_and_product_ingredients_from_local(products)
 add_products_and_product_ingredients_from_csv
 add_product_photos
