@@ -356,7 +356,14 @@ def add_products_and_product_ingredients_from_csv
 	products = []
 	rows = []
 	csv.each do |row|
-		row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(",").map{|ia| ia =ia.slice(1..-2)}
+		p row
+		if row["ingredients"].nil?
+			p ""
+		else
+			row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
+		end
+		p "::::::::::::::::::::::::"
+		p row
 		# ingredients_array.each do|ia|
 		# 	ia = ia.slice(1..-2)
 		# end
@@ -368,33 +375,42 @@ def add_products_and_product_ingredients_from_csv
 	p "Adding products......"
 
 	products.each do |p|
-		name = p["name"]
-		brand = p["brand"]
-		p_ings = p["ingredients"]
-		pr = Product.create(name: name, brand: brand)
+		if p["name"].nil? || p["brand"].nil? || p["ingredients"].nil?
+			p ""
+		else
+			name = p["name"]
+			brand = p["brand"]
+			p_ings = p["ingredients"]
+			pr = Product.create(name: name, brand: brand)
+		end
 
-		p_ings.each.with_index do |pi, idx|
-			p "Adding product ingredients......"
-			gr = IngredientGroup.search_by_name(pi).first
-			other = IngredientGroup.search_by_name("other").first
-			
-			ig = ""
-			ingredients = Ingredient.all
-			if gr.nil?
-				ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-			else
-				if Ingredient.search_by_name(pi).empty?
+		if p_ings.nil?
+			p ""
+		
+		else
+			p_ings.each.with_index do |pi, idx|
+				p "Adding product ingredients......"
+				gr = IngredientGroup.search_by_name(pi).first
+				other = IngredientGroup.search_by_name("other").first
+				
+				ig = ""
+				ingredients = Ingredient.all
+				if gr.nil?
 					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
 				else
-					ig = Ingredient.search_by_name(pi).first
+					if Ingredient.search_by_name(pi).empty?
+						ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+					else
+						ig = Ingredient.search_by_name(pi).first
+					end
 				end
-			end
 
-			pri = ProductIngredient.new()
-			pri.product_id = pr.id
-			pri.ingredient_id = ig.id
-			pri.rank = idx
-			pri.save
+				pri = ProductIngredient.new()
+				pri.product_id = pr.id
+				pri.ingredient_id = ig.id
+				pri.rank = idx
+				pri.save
+			end
 		end
 	
 	end
@@ -421,11 +437,11 @@ end
 
 
 
-# add_ingredient_groups_and_ingredients(ing_grp)
+add_ingredient_groups_and_ingredients(ing_grp)
 add_products_and_product_ingredients_from_local(products)
 add_products_and_product_ingredients_from_csv
 add_product_photos
-unpack_csv_and_seed_CR_table
+# unpack_csv_and_seed_CR_table
 
 
 
