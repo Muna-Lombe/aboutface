@@ -437,11 +437,11 @@ end
 
 
 
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
-add_product_photos
-# unpack_csv_and_seed_CR_table
+# add_ingredient_groups_and_ingredients(ing_grp)
+# add_products_and_product_ingredients_from_local(products)
+# add_products_and_product_ingredients_from_csv
+# add_product_photos
+unpack_csv_and_seed_CR_table
 
 
 
