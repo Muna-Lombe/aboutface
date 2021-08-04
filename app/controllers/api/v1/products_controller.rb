@@ -16,9 +16,9 @@ class Api::V1::ProductsController <  Api::V1::BaseController
   end
 
   def compare
-    if params[:compare].present?
-      spr = JSON.parse(params[:compare])
 
+    if params[:compare].present?
+      spr = params[:compare]
       p1 = Product.search_by_name(spr["name"]).first
       p2 = Product.search_by_name(spr["compare_to"]).first
 
@@ -60,5 +60,9 @@ class Api::V1::ProductsController <  Api::V1::BaseController
   private
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def set_compare
+      params.require(:compare).permit(:compare)
   end
 end

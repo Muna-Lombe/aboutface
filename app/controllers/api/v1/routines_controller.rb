@@ -18,10 +18,18 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
 
   end
 
+  def add_routine_product
+
+    @routine_product = RoutineProduct.new(routine_id: params[:routine_id],product_id: params[:product_id])
+    if @routine_product.save
+      render json: @routine_product
+    else
+      render json: { status: 'fail'}, status: 400
+    end
+  end
+
   def show
     render json: @routine
-
-
   end 
   
   def update
@@ -41,8 +49,11 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
   private
 
   def set_routine
-    @routine = @user.routines.find(params[:id])
+    @routine = current_user.routines.find(params[:id])
   end
+  # def routine_product_params
+  #   params.require(:routine_product).permit(:routine_id, :product_id)
+  # end
 
   def routine_params
     params.require(:routine).permit(:name)
