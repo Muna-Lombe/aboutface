@@ -357,6 +357,7 @@ def add_products_and_product_ingredients_from_csv
 	rows = []
 	csv.each do |row|
 		row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(",").map{|ia| ia =ia.slice(1..-2)}
+		p row
 		# ingredients_array.each do|ia|
 		# 	ia = ia.slice(1..-2)
 		# end
@@ -424,8 +425,8 @@ end
 # add_ingredient_groups_and_ingredients(ing_grp)
 add_products_and_product_ingredients_from_local(products)
 add_products_and_product_ingredients_from_csv
-add_product_photos
-unpack_csv_and_seed_CR_table
+# add_product_photos
+# unpack_csv_and_seed_CR_table
 
 
 

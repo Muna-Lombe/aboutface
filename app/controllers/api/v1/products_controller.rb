@@ -29,10 +29,12 @@ class Api::V1::ProductsController <  Api::V1::BaseController
       count = 1
       flagged_crs = []
       p1_ings.each do |p1_ing|
-        p2_ings.each do|p2_ing|
-
-          p1_igr = IngredientGroup.search_by_name(p1_ing.name).first
-          p2_igr = IngredientGroup.search_by_name(p2_ing.name).first
+        p2_ings.each.with_index do|p2_ing, i|
+          puts "1: id: #{p1_ing.id} #{p1_ing.name} 2: id: #{p2_ing.id}#{p2_ing.name}"
+          p1_igr = IngredientGroup.search_by_name(p1_ing.name)&.first
+          p2_igr = IngredientGroup.search_by_name(p2_ing.name)&.first
+          # debugger
+          # puts "index: #{i} - #{p1_ing.name}:#{p1_igr.name}, #{p1_ing.name}:#{p2_igr}"
           cr = crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first.nil? ? crs.where(["group_one_id = ? and group_two_id = ?", p2_igr.id, p1_igr.id]).first : crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first
           
           if flagged_crs.include?(cr)
