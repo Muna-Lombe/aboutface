@@ -40,7 +40,7 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
   end
 
   def destroy
-    if @routine_product.destroy
+    if @routine.destroy
       render json: { status: 'routine deleted'}, status: 200
     else
       render json: { status: 'fail'}, status: 400
@@ -62,10 +62,6 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
   def set_routine
     @routine = current_user.routines.find(params[:id])
   end
-
-  # def set_routine_product
-  #   @routine_product = @routine.routine_products.find(params[:id])
-  # end
 
   def routine_params
     params.require(:routine).permit(:name)

@@ -50,7 +50,8 @@ class Api::V1::ProductsController <  Api::V1::BaseController
           count +=1
         end
       end
-      render json: {p1: p1, p2: p2, compare_results: flagged_crs}
+      results = flagged_crs.length > 0 ? flagged_crs : [{title: "Products compatible", compatible: true}]
+      render json: {p1: p1, p2: p2, compare_results: results}
     end
   end 
 
