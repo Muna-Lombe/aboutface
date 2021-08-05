@@ -1,5 +1,7 @@
 class Api::V1::RoutinesController <  Api::V1::BaseController
   before_action :set_routine, only: [:show, :update, :destroy]
+  # before_action :set_routine_product, only: [:destroy_routine_product]
+
   def index
       @routines = current_user.routines
       render json: @routines, each_serializer: RoutineSerializer
@@ -38,7 +40,7 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
   end
 
   def destroy
-    if @routine.destroy
+    if @routine_product.destroy
       render json: { status: 'routine deleted'}, status: 200
     else
       render json: { status: 'fail'}, status: 400
@@ -46,16 +48,27 @@ class Api::V1::RoutinesController <  Api::V1::BaseController
     
   end
 
+  def destroy_routine_product
+    @routine_product = RoutineProduct.find(params[:id])
+    if @routine_product.destroy
+      render json: { status: 'routine product deleted'}, status: 200
+    else
+      render json: { status: 'fail'}, status: 400
+    end 
+  end
+
   private
 
   def set_routine
     @routine = current_user.routines.find(params[:id])
   end
-  # def routine_product_params
-  #   params.require(:routine_product).permit(:routine_id, :product_id)
+
+  # def set_routine_product
+  #   @routine_product = @routine.routine_products.find(params[:id])
   # end
 
   def routine_params
     params.require(:routine).permit(:name)
   end
+  
 end

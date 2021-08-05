@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :users, only: [:show ]
       post 'products/compare', to: "products#compare", as: :compare
       post 'routines/:id/routine_products', to: "routines#add_routine_product", as: :add_routine_product
+      delete "routines/:id/routine_products/:id", to: "routines#destroy_routine_product", as: :destroy_routine_product
+
       resources :products, only: [:index, :show ]
       resources :routines, only: [:index, :show, :create, :update, :destroy ]
       
