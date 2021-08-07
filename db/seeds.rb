@@ -417,8 +417,10 @@ def add_products_and_product_ingredients_from_csv
 end
 
 def add_product_photos
+	puts "attaching photos...."
 	products = Product.all
 	products.each do |product|
+		puts "attaching #{product.name} photo...."
 		name = product.name
 		if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
 			name = "SkinCeuticals Triple Lipid Restore"
@@ -431,17 +433,88 @@ def add_product_photos
 		# p "#{name}===>#{file}"
 		product.photo.attach(io: File.open(file), filename: "#{product.name}.png", content_type: 'image/png')
 	end
-
-	
 end
 
+def compare(pid1,pid2)
+
+	p1_ings = Ingredient.search_by_name(pid1.id)
+	p2_ings = Ingredient.search_by_name(pid2.id)
+	
+	crs = CompatibilityRule.all
+	count = 1
+	flagged_crs = []
+	compatible_crs = []
+	p1_ings.each do |p1_ing|
+		p2_ings.each.with_index do|p2_ing, i|
+			if p1_ing == "("
+				p1_ing = Ingredient.find(1)
+			elsif p2_ing == "("
+				p2_ing= Ingredient.find(1)
+			end
+			# puts "1: id: #{p1_ing.id} #{p1_ing.name} 2: id: #{p2_ing.id}#{p2_ing.name}"
+			p1_igr = IngredientGroup.search_by_name(p1_ing.name)&.first
+			p2_igr = IngredientGroup.search_by_name(p2_ing.name)&.first
+			# debugger
+			# puts "index: #{i} - #{p1_ing.name}:#{p1_igr.name}, #{p1_ing.name}:#{p2_igr}"
+			# cr = crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first
+			
+				# debugger
+			cr = crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first.nil? ? crs.where(["group_one_id = ? and group_two_id = ?", p2_igr.id, p1_igr.id]).first : crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first
+			
+			if flagged_crs.include?(cr)
+				p ""
+			elsif cr.nil?
+				flagged_crs << {error: "ingredient group #{p1_igr.name} or #{p2_igr.name} not found in compatibility Rules"}
+			else
+				#cr = cr.first
+				if cr.compatible == false
+				flagged_crs << {gr1: cr.group_one.name, gr2: cr.group_two.name, compatible: cr.compatible, reason: cr.reason, rating: cr.rating}
+					# flagged_crs << [[pid1.name,pid2.name], "not compatible"]
+				# elsif cr.compatible == true
+				# 	# compatible_crs << {gr1: cr.group_one.name, gr2: cr.group_two.name, compatible: cr.compatible, reason: cr.reason, rating: cr.rating}
+				# 	compatible_crs << [[pid1.name,pid2.name], "compatible"]
+
+				end
+			end
+			count +=1
+		end
+	end
+	results = flagged_crs.length > 0 ? {title: [pid1.name,pid2.name], compatible: false} : {title: [pid1.name,pid2.name], compatible: true}
+	# return [flagged_crs, compatible_crs]
+	return results
+    
+end 
+
+def test_compare_products
+	products = Product.all
+	compatible = []
+	not_compatible = []
+
+	products.each.with_index do |product, idx|
+		products[idx..-1].each do |pr2|
+			if idx == products.length-1
+				break
+			else
 
 
-# add_ingredient_groups_and_ingredients(ing_grp)
-# add_products_and_product_ingredients_from_local(products)
-# add_products_and_product_ingredients_from_csv
-# add_product_photos
-unpack_csv_and_seed_CR_table
+				nxt_elem = products[idx+1] 
+				puts "comparing #{product.name} and  #{pr2.name}......."
+				result = compare(product, pr2)
+				result[:compatible]? compatible << result : not_compatible << result
+				puts "result: #{result[:compatible]}"
+			end
+		end
+	end
+	debugger
+end
+
+#add_ingredient_groups_and_ingredients(ing_grp)
+#add_products_and_product_ingredients_from_local(products)
+#add_products_and_product_ingredients_from_csv
+add_product_photos
+#unpack_csv_and_seed_CR_table
+# test_compare_products
+
 
 
 
