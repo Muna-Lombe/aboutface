@@ -25,7 +25,6 @@ def unpack_csv_and_seed_CR_table
 
 
 
-
 	cr.each do|r|
 		g1 = IngredientGroup.search_by_name(r["name"]).first
 
@@ -421,18 +420,23 @@ def add_product_photos
 	puts "attaching photos...."
 	products = Product.all
 	products.each do |product|
-		puts "attaching #{product.name} photo...."
-		name = product.name
-		if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
-			name = "SkinCeuticals Triple Lipid Restore"
-		elsif name == "AHA/BHA Clarifying Treatment Toner"
-			name = "AHA BHA Clarifying Treatment Toner"
-		end
-#		file =  File.read(Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png"))
-		file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+		if product.photo.attached?
+			puts "#{product.name}==photo already attached!"
+		else
+			puts "attaching #{product.name} photo...."
+			name = product.name
+			if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
+				name = "SkinCeuticals Triple Lipid Restore"
+			elsif name == "AHA/BHA Clarifying Treatment Toner"
+				name = "AHA BHA Clarifying Treatment Toner"
+			end
+	#		file =  File.read(Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png"))
+			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
 
-		# p "#{name}===>#{file}"
-		product.photo.attach(io: File.open(file), filename: "#{product.name}.png", content_type: 'image/png')
+			# p "#{name}===>#{file}"
+			product.photo.attach(io: File.open(file), filename: "#{name}.png", content_type: 'image/png')
+		end
+		
 	end
 end
 
@@ -496,8 +500,6 @@ def test_compare_products
 			if idx == products.length-1
 				break
 			else
-
-
 				nxt_elem = products[idx+1] 
 				puts "comparing #{product.name} and  #{pr2.name}......."
 				result = compare(product, pr2)
@@ -509,12 +511,29 @@ def test_compare_products
 	debugger
 end
 
+def check_photo
+	products = Product.all
+
+	puts "checking photos....."
+	products.each do|product|
+		if product.photo.attached?
+			puts "attached --- #{product.name}=#{product.photo.attachment}"
+			debugger
+			#product.photo.purge
+		else
+			puts "not attached --- #{product.name}=#{product.photo.attached?}"
+			
+		end
+	end
+end
+
 #add_ingredient_groups_and_ingredients(ing_grp)
 #add_products_and_product_ingredients_from_local(products)
 #add_products_and_product_ingredients_from_csv
-add_product_photos
+#add_product_photos
 #unpack_csv_and_seed_CR_table
 # test_compare_products
+check_photo
 
 
 
