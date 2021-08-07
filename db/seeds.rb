@@ -25,6 +25,7 @@ def unpack_csv_and_seed_CR_table
 
 
 
+
 	cr.each do|r|
 		g1 = IngredientGroup.search_by_name(r["name"]).first
 
