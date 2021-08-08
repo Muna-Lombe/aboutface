@@ -8,7 +8,13 @@ require "open-uri"
   # movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+def clear_tables
+	Ingredient.destroy_all
+	IngredientGroup.destroy_all
+	Product.destroy_all
+	ProductIngredient.destroy_all
+	CompatibilityRule.destroy_all
+end
 
 def unpack_csv_and_seed_CR_table
 	puts "unpacking csv............."
@@ -356,14 +362,14 @@ def add_products_and_product_ingredients_from_csv
 	products = []
 	rows = []
 	csv.each do |row|
-		p row
+	#	p row
 		if row["ingredients"].nil?
 			p ""
 		else
 			row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
 		end
-		p "::::::::::::::::::::::::"
-		p row
+		#p "::::::::::::::::::::::::"
+		#p row
 		# ingredients_array.each do|ia|
 		# 	ia = ia.slice(1..-2)
 		# end
@@ -518,7 +524,7 @@ def check_photo
 	products.each do|product|
 		if product.photo.attached?
 			puts "attached --- #{product.name}=#{product.photo.attachment}"
-			debugger
+			#debugger
 			#product.photo.purge
 		else
 			puts "not attached --- #{product.name}=#{product.photo.attached?}"
@@ -527,13 +533,24 @@ def check_photo
 	end
 end
 
-#add_ingredient_groups_and_ingredients(ing_grp)
-#add_products_and_product_ingredients_from_local(products)
-#add_products_and_product_ingredients_from_csv
-#add_product_photos
-#unpack_csv_and_seed_CR_table
+def record_count
+	p "Ingredient == #{Ingredient.count}"
+	p "Ingredientgorup == {IngredientGroup.count}"
+	p "product == #{Product.count}"
+	p "productIngredient#{ProductIngredient.count}"
+	p "compatibility#{CompatibilityRule.count}"
+end
+
+clear_tables
+add_ingredient_groups_and_ingredients(ing_grp)
+add_products_and_product_ingredients_from_local(products)
+add_products_and_product_ingredients_from_csv
+add_product_photos
+unpack_csv_and_seed_CR_table
+record_count
 # test_compare_products
-check_photo
+#check_photo
+
 
 
 
