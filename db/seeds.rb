@@ -366,7 +366,7 @@ def add_products_and_product_ingredients_from_csv
 		#if row["ingredients"].nil?
 		#	p ""
 		#else
-		#	row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
+		row["ingredients"] = row["ingredients"].split(",").map{|ia| ia }	
 		#end
 		#p "::::::::::::::::::::::::"
 		#p row
@@ -375,10 +375,9 @@ def add_products_and_product_ingredients_from_csv
 		# end
 		rows << row
 		products << row.to_hash
+		p row.to_hash
 	end
 	count = 1
-
-	p products
 	
 	p "Adding products......"
 
@@ -553,13 +552,13 @@ end
 #clear_tables
 #add_ingredient_groups_and_ingredients(ing_grp)
 #add_products_and_product_ingredients_from_local(products)
-#add_products_and_product_ingredients_from_csv
+add_products_and_product_ingredients_from_csv
 #add_product_photos
 #unpack_csv_and_seed_CR_table
 #record_count
 #test_compare_products
 #check_photo
-test2
+#test2
 
 
 
