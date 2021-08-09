@@ -28,8 +28,8 @@ class Api::V1::ProductsController <  Api::V1::BaseController
       crs = CompatibilityRule.all
       count = 1
       flagged_crs = []
-      p1_ings.each do |p1_ing|
-        p2_ings.each.with_index do|p2_ing, i|
+      p1_ings[0..10].each do |p1_ing|
+        p2_ings[0..10].each.with_index do|p2_ing, i|
           puts "1: id: #{p1_ing.id} #{p1_ing.name} 2: id: #{p2_ing.id}#{p2_ing.name}"
           p1_igr = IngredientGroup.search_by_name(p1_ing.name)&.first
           p2_igr = IngredientGroup.search_by_name(p2_ing.name)&.first

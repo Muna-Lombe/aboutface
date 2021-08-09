@@ -354,7 +354,7 @@ def add_products_and_product_ingredients_from_local(products)
 end
 def add_products_and_product_ingredients_from_csv
 	puts "unpacking csv............."
-	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Products.csv'))
+	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Products_Sheet2.csv'))
 	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 	puts "---------------------------------------------------------------"
 	puts "seed_CR_table......"
@@ -363,11 +363,11 @@ def add_products_and_product_ingredients_from_csv
 	rows = []
 	csv.each do |row|
 	#	p row
-		if row["ingredients"].nil?
-			p ""
-		else
-			row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
-		end
+		#if row["ingredients"].nil?
+		#	p ""
+		#else
+		#	row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
+		#end
 		#p "::::::::::::::::::::::::"
 		#p row
 		# ingredients_array.each do|ia|
@@ -377,49 +377,51 @@ def add_products_and_product_ingredients_from_csv
 		products << row.to_hash
 	end
 	count = 1
+
+	p products
 	
 	p "Adding products......"
 
-	products.each do |p|
-		if p["name"].nil? || p["brand"].nil? || p["ingredients"].nil?
-			p ""
-		else
-			name = p["name"]
-			brand = p["brand"]
-			p_ings = p["ingredients"]
-			pr = Product.create(name: name, brand: brand)
-		end
-
-		if p_ings.nil?
-			p ""
-		
-		else
-			p_ings.each.with_index do |pi, idx|
-				p "Adding product ingredients......"
-				gr = IngredientGroup.search_by_name(pi).first
-				other = IngredientGroup.search_by_name("other").first
-				
-				ig = ""
-				ingredients = Ingredient.all
-				if gr.nil?
-					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-				else
-					if Ingredient.search_by_name(pi).empty?
-						ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-					else
-						ig = Ingredient.search_by_name(pi).first
-					end
-				end
-
-				pri = ProductIngredient.new()
-				pri.product_id = pr.id
-				pri.ingredient_id = ig.id
-				pri.rank = idx
-				pri.save
-			end
-		end
-	
-	end
+	#products.each do |p|
+	#	if p["name"].nil? || p["brand"].nil? || p["ingredients"].nil?
+	#		p ""
+	#	else
+	#		name = p["name"]
+	#		brand = p["brand"]
+	#		p_ings = p["ingredients"]
+	#		pr = Product.create(name: name, brand: brand)
+	#	end
+#
+	#	if p_ings.nil?
+	#		p ""
+	#	
+	#	else
+	#		p_ings.each.with_index do |pi, idx|
+	#			p "Adding product ingredients......"
+	#			gr = IngredientGroup.search_by_name(pi).first
+	#			other = IngredientGroup.search_by_name("other").first
+	#			
+	#			ig = ""
+	#			ingredients = Ingredient.all
+	#			if gr.nil?
+	#				ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+	#			else
+	#				if Ingredient.search_by_name(pi).empty?
+	#					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+	#				else
+	#					ig = Ingredient.search_by_name(pi).first
+	#				end
+	#			end
+#
+	#			pri = ProductIngredient.new()
+	#			pri.product_id = pr.id
+	#			pri.ingredient_id = ig.id
+	#			pri.rank = idx
+	#			pri.save
+	#		end
+	#	end
+	#
+	#end
 end
 
 def add_product_photos
@@ -455,8 +457,8 @@ def compare(pid1,pid2)
 	count = 1
 	flagged_crs = []
 	compatible_crs = []
-	p1_ings.each do |p1_ing|
-		p2_ings.each.with_index do|p2_ing, i|
+	p1_ings[0..10].each do |p1_ing|
+		p2_ings[0..10].each.with_index do|p2_ing, i|
 			if p1_ing == "("
 				p1_ing = Ingredient.find(1)
 			elsif p2_ing == "("
@@ -490,7 +492,7 @@ def compare(pid1,pid2)
 			count +=1
 		end
 	end
-	results = flagged_crs.length > 0 ? {title: [pid1.name,pid2.name], compatible: false} : {title: [pid1.name,pid2.name], compatible: true}
+	results = flagged_crs.length > 0 ? {title: [pid1.name,pid2.name], reason: flagged_crs, compatible: false} : {title: [pid1.name,pid2.name], compatible: true}
 	# return [flagged_crs, compatible_crs]
 	return results
     
@@ -501,8 +503,8 @@ def test_compare_products
 	compatible = []
 	not_compatible = []
 
-	products.each.with_index do |product, idx|
-		products[idx..-1].each do |pr2|
+	products[0..10].each.with_index do |product, idx|
+		products[idx..10].each do |pr2|
 			if idx == products.length-1
 				break
 			else
@@ -541,15 +543,23 @@ def record_count
 	p "compatibility#{CompatibilityRule.count}"
 end
 
-clear_tables
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
-add_product_photos
-unpack_csv_and_seed_CR_table
-record_count
-# test_compare_products
+def test2
+	p1 = Product.first
+	p2 = Product.second
+	result = compare(p1, p2)
+	debugger
+end
+
+#clear_tables
+#add_ingredient_groups_and_ingredients(ing_grp)
+#add_products_and_product_ingredients_from_local(products)
+#add_products_and_product_ingredients_from_csv
+#add_product_photos
+#unpack_csv_and_seed_CR_table
+#record_count
+#test_compare_products
 #check_photo
+test2
 
 
 
