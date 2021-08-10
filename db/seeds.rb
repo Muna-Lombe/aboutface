@@ -354,7 +354,7 @@ def add_products_and_product_ingredients_from_local(products)
 end
 def add_products_and_product_ingredients_from_csv
 	puts "unpacking csv............."
-	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Products.csv'))
+	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Products_Sheet2.csv'))
 	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 	puts "---------------------------------------------------------------"
 	puts "seed_CR_table......"
@@ -363,11 +363,11 @@ def add_products_and_product_ingredients_from_csv
 	rows = []
 	csv.each do |row|
 	#	p row
-		if row["ingredients"].nil?
-			p ""
-		else
-			row["ingredients"] = row["ingredients"].gsub("[", "").gsub("]", "").split(";").map{|ia| ia =ia.slice(1..-2)}	
-		end
+		#if row["ingredients"].nil?
+		#	p ""
+		#else
+		row["ingredients"] = row["ingredients"].split(",").map{|ia| ia }	
+		#end
 		#p "::::::::::::::::::::::::"
 		#p row
 		# ingredients_array.each do|ia|
@@ -375,8 +375,10 @@ def add_products_and_product_ingredients_from_csv
 		# end
 		rows << row
 		products << row.to_hash
+	#	p row.to_hash
 	end
 	count = 1
+	#p products
 	
 	p "Adding products......"
 
@@ -400,7 +402,6 @@ def add_products_and_product_ingredients_from_csv
 				other = IngredientGroup.search_by_name("other").first
 				
 				ig = ""
-				ingredients = Ingredient.all
 				if gr.nil?
 					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
 				else
@@ -418,31 +419,30 @@ def add_products_and_product_ingredients_from_csv
 				pri.save
 			end
 		end
-	
 	end
 end
 
 def add_product_photos
 	puts "attaching photos...."
 	products = Product.all
+	count = 1
 	products.each do |product|
 		if product.photo.attached?
-			puts "#{product.name}==photo already attached!"
+			puts "#{count}.#{product.name}==photo already attached!"
 		else
-			puts "attaching #{product.name} photo...."
+			puts "#{count}.attaching #{product.name} photo...."
 			name = product.name
 			if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
 				name = "SkinCeuticals Triple Lipid Restore"
 			elsif name == "AHA/BHA Clarifying Treatment Toner"
 				name = "AHA BHA Clarifying Treatment Toner"
 			end
-	#		file =  File.read(Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png"))
-			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos_2', "#{name}.png")
 
-			# p "#{name}===>#{file}"
+			#p "#{name}===>#{file}"
 			product.photo.attach(io: File.open(file), filename: "#{name}.png", content_type: 'image/png')
 		end
-		
+		count += 1
 	end
 end
 
@@ -455,8 +455,8 @@ def compare(pid1,pid2)
 	count = 1
 	flagged_crs = []
 	compatible_crs = []
-	p1_ings.each do |p1_ing|
-		p2_ings.each.with_index do|p2_ing, i|
+	p1_ings[0..10].each do |p1_ing|
+		p2_ings[0..10].each.with_index do|p2_ing, i|
 			if p1_ing == "("
 				p1_ing = Ingredient.find(1)
 			elsif p2_ing == "("
@@ -490,7 +490,7 @@ def compare(pid1,pid2)
 			count +=1
 		end
 	end
-	results = flagged_crs.length > 0 ? {title: [pid1.name,pid2.name], compatible: false} : {title: [pid1.name,pid2.name], compatible: true}
+	results = flagged_crs.length > 0 ? {title: [pid1.name,pid2.name], reason: flagged_crs, compatible: false} : {title: [pid1.name,pid2.name], compatible: true}
 	# return [flagged_crs, compatible_crs]
 	return results
     
@@ -501,8 +501,8 @@ def test_compare_products
 	compatible = []
 	not_compatible = []
 
-	products.each.with_index do |product, idx|
-		products[idx..-1].each do |pr2|
+	products[0..10].each.with_index do |product, idx|
+		products[idx..10].each do |pr2|
 			if idx == products.length-1
 				break
 			else
@@ -541,15 +541,23 @@ def record_count
 	p "compatibility#{CompatibilityRule.count}"
 end
 
-clear_tables
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
+def test2
+	p1 = Product.first
+	p2 = Product.second
+	result = compare(p1, p2)
+	debugger
+end
+
+#clear_tables
+#add_ingredient_groups_and_ingredients(ing_grp)
+#add_products_and_product_ingredients_from_local(products)
+#add_products_and_product_ingredients_from_csv
 add_product_photos
-unpack_csv_and_seed_CR_table
-record_count
-# test_compare_products
+#unpack_csv_and_seed_CR_table
+#record_count
+#test_compare_products
 #check_photo
+#test2
 
 
 
