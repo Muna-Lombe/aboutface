@@ -375,75 +375,74 @@ def add_products_and_product_ingredients_from_csv
 		# end
 		rows << row
 		products << row.to_hash
-		p row.to_hash
+	#	p row.to_hash
 	end
 	count = 1
+	#p products
 	
 	p "Adding products......"
 
-	#products.each do |p|
-	#	if p["name"].nil? || p["brand"].nil? || p["ingredients"].nil?
-	#		p ""
-	#	else
-	#		name = p["name"]
-	#		brand = p["brand"]
-	#		p_ings = p["ingredients"]
-	#		pr = Product.create(name: name, brand: brand)
-	#	end
-#
-	#	if p_ings.nil?
-	#		p ""
-	#	
-	#	else
-	#		p_ings.each.with_index do |pi, idx|
-	#			p "Adding product ingredients......"
-	#			gr = IngredientGroup.search_by_name(pi).first
-	#			other = IngredientGroup.search_by_name("other").first
-	#			
-	#			ig = ""
-	#			ingredients = Ingredient.all
-	#			if gr.nil?
-	#				ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-	#			else
-	#				if Ingredient.search_by_name(pi).empty?
-	#					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
-	#				else
-	#					ig = Ingredient.search_by_name(pi).first
-	#				end
-	#			end
-#
-	#			pri = ProductIngredient.new()
-	#			pri.product_id = pr.id
-	#			pri.ingredient_id = ig.id
-	#			pri.rank = idx
-	#			pri.save
-	#		end
-	#	end
-	#
-	#end
+	products.each do |p|
+		if p["name"].nil? || p["brand"].nil? || p["ingredients"].nil?
+			p ""
+		else
+			name = p["name"]
+			brand = p["brand"]
+			p_ings = p["ingredients"]
+			pr = Product.create(name: name, brand: brand)
+		end
+
+		if p_ings.nil?
+			p ""
+		
+		else
+			p_ings.each.with_index do |pi, idx|
+				p "Adding product ingredients......"
+				gr = IngredientGroup.search_by_name(pi).first
+				other = IngredientGroup.search_by_name("other").first
+				
+				ig = ""
+				if gr.nil?
+					ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+				else
+					if Ingredient.search_by_name(pi).empty?
+						ig = Ingredient.create(name: pi, ingredient_group_id: other.id)
+					else
+						ig = Ingredient.search_by_name(pi).first
+					end
+				end
+
+				pri = ProductIngredient.new()
+				pri.product_id = pr.id
+				pri.ingredient_id = ig.id
+				pri.rank = idx
+				pri.save
+			end
+		end
+	end
 end
 
 def add_product_photos
 	puts "attaching photos...."
 	products = Product.all
+	count = 1
 	products.each do |product|
 		if product.photo.attached?
-			puts "#{product.name}==photo already attached!"
+			puts "#{count}.#{product.name}==photo already attached!"
 		else
-			puts "attaching #{product.name} photo...."
+			puts "#{count}.attaching #{product.name} photo...."
 			name = product.name
 			if name == "SkinCeuticals Triple Lipid Restore 2:4:2"
 				name = "SkinCeuticals Triple Lipid Restore"
 			elsif name == "AHA/BHA Clarifying Treatment Toner"
 				name = "AHA BHA Clarifying Treatment Toner"
 			end
-	#		file =  File.read(Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png"))
-			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos_2', "#{name}.png")
 
-			# p "#{name}===>#{file}"
+			#p "#{name}===>#{file}"
 			product.photo.attach(io: File.open(file), filename: "#{name}.png", content_type: 'image/png')
 		end
-		
+		count += 1
 	end
 end
 
@@ -552,8 +551,8 @@ end
 #clear_tables
 #add_ingredient_groups_and_ingredients(ing_grp)
 #add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
-#add_product_photos
+#add_products_and_product_ingredients_from_csv
+add_product_photos
 #unpack_csv_and_seed_CR_table
 #record_count
 #test_compare_products
