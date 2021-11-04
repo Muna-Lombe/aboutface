@@ -8,56 +8,7 @@ require "open-uri"
   # movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def clear_tables
-	Ingredient.destroy_all
-	IngredientGroup.destroy_all
-	Product.destroy_all
-	ProductIngredient.destroy_all
-	CompatibilityRule.destroy_all
-end
 
-def unpack_csv_and_seed_CR_table
-	puts "unpacking csv............."
-	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Skincare_Compatibility.csv'))
-	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-	puts "---------------------------------------------------------------"
-	puts "seed_CR_table......"
-
-	cr = []
-	csv.each do |row|
-		cr << row.to_hash
-	end
-	count = 1
-
-
-
-	cr.each do|r|
-		g1 = IngredientGroup.search_by_name(r["name"]).first
-
-		g2 = IngredientGroup.search_by_name(r["compared_to"]).first
-		rule = CompatibilityRule.new()
-
-		rule.group_one_id = g1.id
-
-		rule.group_two_id = g2.id
-
-		bool = (r["compatible"].downcase == "true")
-
-		rule.compatible = bool
-
-		rule.reason = r["text"]
-
-		rule.rating = r["rating"]
-
-		rule.save
-
-		p "#{count}. #{rule}"
-		count += 1
-
-	end
-	puts "Done! Compatibility_Rule table has #{CompatibilityRule.count} instances"
-
-end
 #
 #
 #
@@ -267,24 +218,6 @@ ing_grp = [
 	]
 ]
 
-def add_ingredient_groups_and_ingredients(ing_grp)
-	p "Adding Ingredient groups......"
-	ing_grp.each do |ig|
-		name = ig[0]
-		ings = ig[1]
-		igrp = IngredientGroup.create(name: name)
-		ings.each do |ing|
-			p "Adding Ingredients......"
-
-			i = Ingredient.new(name: ing, ingredient_group_id: igrp.id)
-			i.save
-		end
-	end
-end
-
-
-#
-#["SK-II","ESTEE LAUDER", "The Inkey List" "The Ordinary", "COSRX", "SkinCeuticals"]
 products = [
 	["Advanced Night Repair Eye Supercharged Complex","ESTEE LAUDER",	
 		[
@@ -317,6 +250,73 @@ products = [
 		]
 	]
 ]
+#
+#["SK-II","ESTEE LAUDER", "The Inkey List" "The Ordinary", "COSRX", "SkinCeuticals"]
+
+def clear_tables
+	Ingredient.destroy_all
+	IngredientGroup.destroy_all
+	Product.destroy_all
+	ProductIngredient.destroy_all
+	CompatibilityRule.destroy_all
+end
+
+def unpack_csv_and_seed_CR_table
+	puts "unpacking csv............."
+	csv_text = File.read(Rails.root.join('lib', 'assets', 'seed_data', 'Skincare_Compatibility.csv'))
+	csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+	puts "---------------------------------------------------------------"
+	puts "seed_CR_table......"
+
+	cr = []
+	csv.each do |row|
+		cr << row.to_hash
+	end
+	count = 1
+
+
+	cr.each do|r|
+		g1 = IngredientGroup.search_by_name(r["name"]).first
+
+		g2 = IngredientGroup.search_by_name(r["compared_to"]).first
+		rule = CompatibilityRule.new()
+
+		rule.group_one_id = g1.id
+
+		rule.group_two_id = g2.id
+
+		bool = (r["compatible"].downcase == "true")
+
+		rule.compatible = bool
+
+		rule.reason = r["text"]
+
+		rule.rating = r["rating"]
+
+		rule.save
+
+		p "#{count}. #{rule}"
+		count += 1
+
+	end
+	puts "Done! Compatibility_Rule table has #{CompatibilityRule.count} instances"
+
+end
+
+def add_ingredient_groups_and_ingredients(ing_grp)
+	p "Adding Ingredient groups......"
+	ing_grp.each do |ig|
+		name = ig[0]
+		ings = ig[1]
+		igrp = IngredientGroup.create(name: name)
+		ings.each do |ing|
+			p "Adding Ingredients......"
+
+			i = Ingredient.new(name: ing, ingredient_group_id: igrp.id)
+			i.save
+		end
+	end
+end
 
 def add_products_and_product_ingredients_from_local(products)
 	products.each do |p|
@@ -437,7 +437,15 @@ def add_product_photos
 			elsif name == "AHA/BHA Clarifying Treatment Toner"
 				name = "AHA BHA Clarifying Treatment Toner"
 			end
-			file =  Rails.root.join('lib', 'assets', 'seed_data', 'product_photos_2', "#{name}.png")
+		
+			begin
+				file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+				raise 'Searching for the file abc.txt,fail as file is not there'
+				rescue StandardError
+					file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "generic product.png")
+				ensure
+				puts "It was an exception , it need to be take care"
+			end
 
 			#p "#{name}===>#{file}"
 			product.photo.attach(io: File.open(file), filename: "#{name}.png", content_type: 'image/png')
@@ -549,14 +557,14 @@ def test2
 end
 
 #clear_tables
-#add_ingredient_groups_and_ingredients(ing_grp)
-#add_products_and_product_ingredients_from_local(products)
-#add_products_and_product_ingredients_from_csv
+# add_ingredient_groups_and_ingredients(ing_grp)
+# add_products_and_product_ingredients_from_local(products)
+# add_products_and_product_ingredients_from_csv
 add_product_photos
-#unpack_csv_and_seed_CR_table
-#record_count
+unpack_csv_and_seed_CR_table
+record_count
+check_photo
 #test_compare_products
-#check_photo
 #test2
 
 
