@@ -17,6 +17,9 @@ require "open-uri"
 #terminal commands to use:
 #IngredientGroup.search_by_name("b h a")
 
+#SEED DATA IS OKAY
+
+
 ing_grp = [
 	["Alpha-hydroxy acids (AHAs)",
 		[
