@@ -5,7 +5,7 @@ class ProductSerializer < ActiveModel::Serializer
 
   def photo_url
     if object.photo.attached?
-      object.photo.service_url(params: {'x-oss-process'=> 'style/med'})
+      object.photo.service_url(params: {'x-oss-process': 'style/style.med'})
     else
       ""
     end
