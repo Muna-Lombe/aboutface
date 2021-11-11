@@ -1,5 +1,5 @@
 {
-  "name": "about-face",
+  "name": "aboutface-api",
   "scripts": {
     "dokku": {
       "predeploy": "bundle exec rake assets:precompile",
