@@ -1,0 +1,16 @@
+current directory: /home/muna/code/Muna-Lombe/aboutface/vendor/cache/ruby/2.6.0/gems/aliyun-sdk-0.8.0/ext/crcx
+/home/muna/.rbenv/versions/2.6.6/bin/ruby -I /home/muna/.rbenv/versions/2.6.6/lib/ruby/2.6.0 -r ./siteconf20211112-3399-1oj2ile.rb extconf.rb
+creating Makefile
+
+current directory: /home/muna/code/Muna-Lombe/aboutface/vendor/cache/ruby/2.6.0/gems/aliyun-sdk-0.8.0/ext/crcx
+make "DESTDIR=" clean
+
+current directory: /home/muna/code/Muna-Lombe/aboutface/vendor/cache/ruby/2.6.0/gems/aliyun-sdk-0.8.0/ext/crcx
+make "DESTDIR="
+compiling crc64_ecma.c
+compiling crcx.c
+linking shared-object aliyun/crcx.so
+
+current directory: /home/muna/code/Muna-Lombe/aboutface/vendor/cache/ruby/2.6.0/gems/aliyun-sdk-0.8.0/ext/crcx
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 crcx.so ./.gem.20211112-3399-921qr0/aliyun
