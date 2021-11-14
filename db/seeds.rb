@@ -257,11 +257,11 @@ products = [
 #["SK-II","ESTEE LAUDER", "The Inkey List" "The Ordinary", "COSRX", "SkinCeuticals"]
 
 def clear_tables
-	Ingredient.destroy_all
-	IngredientGroup.destroy_all
-	Product.destroy_all
-	ProductIngredient.destroy_all
-	CompatibilityRule.destroy_all
+	Ingredient.exists? ? Ingredient.destroy_all : "Ingredients table not included "
+	IngredientGroup.exists? ? IngredientGroup.destroy_all : "IngredientsGroup table not included"
+	Product.exists? ? Product.destroy_all : "Product tables not included"
+	ProductIngredient.exists? ? ProductIngredient.destroy_all : "ProductIngredient tables not included"
+	CompatibilityRule.exists? ? CompatibilityRule.destroy_all : "CompatibilityRule tables not included"
 end
 
 def unpack_csv_and_seed_CR_table
@@ -559,19 +559,13 @@ def test2
 	debugger
 end
 
-#clear_tables
-# add_ingredient_groups_and_ingredients(ing_grp)
-# add_products_and_product_ingredients_from_local(products)
-# add_products_and_product_ingredients_from_csv
+clear_tables
+add_ingredient_groups_and_ingredients(ing_grp)
+add_products_and_product_ingredients_from_local(products)
+add_products_and_product_ingredients_from_csv
 add_product_photos
 unpack_csv_and_seed_CR_table
 record_count
 check_photo
 #test_compare_products
 #test2
-
-
-
-
-
-
