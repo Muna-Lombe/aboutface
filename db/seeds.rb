@@ -439,16 +439,20 @@ def add_product_photos
 				name = "SkinCeuticals Triple Lipid Restore"
 			elsif name == "AHA/BHA Clarifying Treatment Toner"
 				name = "AHA BHA Clarifying Treatment Toner"
+			elsif name == "WASO: Color-Smart Day Moisturizer Oil-Free SPF 30 Sunscreen"
+				name = "WASO- Color-Smart Day Moisturizer Oil-Free SPF 30 Sunscreen"
 			end
-		
-			begin
-				file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
-				raise 'Searching for the file abc.txt,fail as file is not there'
-				rescue StandardError
-					file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "generic product.png")
-				ensure
-				puts "It was an exception , it need to be take care"
-			end
+
+			file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+
+			# begin
+				# file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "#{name}.png")
+			# 	raise 'Searching for the file abc.txt,fail as file is not there'
+			# 	rescue StandardError
+			# 		file = Rails.root.join('lib', 'assets', 'seed_data', 'product_photos', "generic product.png")
+			# 	ensure
+			# 	puts "It was an exception , it need to be take care"
+			# end
 
 			#p "#{name}===>#{file}"
 			product.photo.attach(io: File.open(file), filename: "#{name}.png", content_type: 'image/png')

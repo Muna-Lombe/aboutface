@@ -2,9 +2,13 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-local:
-  service: Disk
-  root: <%= Rails.root.join("storage") %>
+# local:
+#   service: Aliyun
+#   access_key_id: <%= Rails.application.credentials.dig(:local, :access_key_id) %>
+#   access_key_secret: <%= Rails.application.credentials.dig(:local, :access_key_secret) %>
+#   bucket: <%= Rails.application.credentials.dig(:local, :bucket) %>
+#   endpoint: <%= Rails.application.credentials.dig(:local, :endpoint) %>
+#   mode: "private"
 
 aliyun:
   service: Aliyun
@@ -14,6 +18,8 @@ aliyun:
   endpoint: <%= Rails.application.credentials.dig(:aliyun, :endpoint) %>
   mode: "private"
 
+
+ 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3
