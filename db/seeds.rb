@@ -563,7 +563,6 @@ def test2
 	debugger
 end
 
-
 clear_tables
 add_ingredient_groups_and_ingredients(ing_grp)
 add_products_and_product_ingredients_from_local(products)
