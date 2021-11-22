@@ -4,7 +4,6 @@ class Api::V1::ProductsController <  Api::V1::BaseController
 
       @products = Product.all
     if params[:query].present?
-    # if params[:query].present?
       @products = @products.search_by_name(params[:query])
     end
 
@@ -34,8 +33,6 @@ class Api::V1::ProductsController <  Api::V1::BaseController
           p1_igr = IngredientGroup.search_by_name(p1_ing.name)&.first
           p2_igr = IngredientGroup.search_by_name(p2_ing.name)&.first
           # debugger
-          # puts "index: #{i} - #{p1_ing.name}:#{p1_igr.name}, #{p1_ing.name}:#{p2_igr}"
-          # cr = crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first
           cr = crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first.nil? ? crs.where(["group_one_id = ? and group_two_id = ?", p2_igr.id, p1_igr.id]).first : crs.where(["group_one_id = ? and group_two_id = ?", p1_igr.id, p2_igr.id]).first
           
           if flagged_crs.include?(cr)

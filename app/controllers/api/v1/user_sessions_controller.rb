@@ -29,7 +29,6 @@ class Api::V1::UserSessionsController < Devise::SessionsController
       js_code: params[:code],
       grant_type: "authorization_code"
     }
-
     @wechat_response = RestClient.get(URL, params: wechat_params)
     @wechat_user = JSON.parse(@wechat_response.body)
     p "wx login result => #{@wechat_user}"

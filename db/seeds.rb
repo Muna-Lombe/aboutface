@@ -563,13 +563,28 @@ def test2
 	debugger
 end
 
-clear_tables
-add_ingredient_groups_and_ingredients(ing_grp)
-add_products_and_product_ingredients_from_local(products)
-add_products_and_product_ingredients_from_csv
-add_product_photos
-unpack_csv_and_seed_CR_table
-record_count
-check_photo
+def loop_in_parts
+	count = Product.first.id
+	s = 8.times do |s|
+			10.times do|r|
+				p "prod #{count} ==> #{Product.find(count).name}"
+				count+=1
+			rescue ActiveRecord::RecordNotFound
+				break
+			end
+			sleep 2.seconds and puts 'still sleeping'
+		end
+	p s
+end
+
+# clear_tables
+# add_ingredient_groups_and_ingredients(ing_grp)
+# add_products_and_product_ingredients_from_local(products)
+# add_products_and_product_ingredients_from_csv
+# add_product_photos
+# unpack_csv_and_seed_CR_table
+# record_count
+# check_photo
 #test_compare_products
 #test2
+# loop_in_parts()
