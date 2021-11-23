@@ -577,6 +577,12 @@ def loop_in_parts
 	p s
 end
 
+def dummy_test
+	app_id = Rails.application.credentials.dig(:wechat, :WECHAT_APP_ID)
+	app_sec =  Rails.application.credentials.dig(:wechat, :WECHAT_APP_SECRET)
+	wx = [app_id, app_sec]
+	return wx
+end
 # clear_tables
 # add_ingredient_groups_and_ingredients(ing_grp)
 # add_products_and_product_ingredients_from_local(products)
@@ -588,3 +594,4 @@ end
 #test_compare_products
 #test2
 # loop_in_parts()
+dummy_test()
